@@ -1,0 +1,15 @@
+body {
+  padding-top: 5rem;
+}
+
+.bg-dark {
+    background-color: #E2922D!important;
+}
+
+.contenido {
+  padding: 0.5rem 3.5rem;
+}
+
+.contenido a {
+  color: #E2922D;
+}
