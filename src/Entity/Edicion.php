@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,6 +19,17 @@ class Edicion
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Evento", inversedBy="ediciones")
+     * @var Evento
+     */
+    private $evento;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lugar;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $nombre;
@@ -27,13 +40,34 @@ class Edicion
     private $plazas;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Sesion", mappedBy="edicion")
+     * @ORM\OrderBy({"fechaInicio": "DESC"})
+     * @var Sesion[]|ArrayCollection
      */
-    private $lugar;
+    private $sesiones;
 
-    public function getId()
+
+    public function __construct()
+    {
+        $this->sesiones = new ArrayCollection();
+    }
+
+
+    public function getId():int
     {
         return $this->id;
+    }
+
+    public function getLugar(): ?string
+    {
+        return $this->lugar;
+    }
+
+    public function setLugar(?string $lugar): self
+    {
+        $this->lugar = $lugar;
+
+        return $this;
     }
 
     public function getNombre(): ?string
@@ -60,15 +94,12 @@ class Edicion
         return $this;
     }
 
-    public function getLugar(): ?string
+    /**
+     * @return Sesion[]|ArrayCollection
+     */
+    public function getSesiones(): ArrayCollection
     {
-        return $this->lugar;
+        return $this->sesiones;
     }
 
-    public function setLugar(?string $lugar): self
-    {
-        $this->lugar = $lugar;
-
-        return $this;
-    }
 }

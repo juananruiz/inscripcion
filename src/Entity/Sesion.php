@@ -17,6 +17,12 @@ class Sesion
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Edicion", inversedBy="sesiones")
+     * @var Edicion
+     */
+    private $edicion;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechaInicio;
@@ -26,15 +32,15 @@ class Sesion
      */
     private $fechaFin;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $duracion;
-
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getEdicion(): Edicion
+    {
+        return $this->edicion;
     }
 
     public function getFechaInicio(): ?\DateTimeInterface
@@ -57,18 +63,6 @@ class Sesion
     public function setFechaFin(?\DateTimeInterface $fechaFin): self
     {
         $this->fechaFin = $fechaFin;
-
-        return $this;
-    }
-
-    public function getDuracion(): ?int
-    {
-        return $this->duracion;
-    }
-
-    public function setDuracion(?int $duracion): self
-    {
-        $this->duracion = $duracion;
 
         return $this;
     }

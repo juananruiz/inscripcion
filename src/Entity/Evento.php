@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,14 +18,26 @@ class Evento
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nombre;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $descripcion;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $duracionEstimada;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Edicion", mappedBy="evento")
+     * @ORM\OrderBy({"fechaInicio": "DESC"})
+     * @var Edicion[]|ArrayCollection
+     */
+    private $ediciones;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nombre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -32,10 +45,22 @@ class Evento
     private $url;
 
 
+    public function __construct()
+    {
+        $this->ediciones = new ArrayCollection();
+    }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Edicion[]|ArrayCollection
+     */
+    public function getEdiciones(): ArrayCollection
+    {
+        return $this->ediciones;
     }
 
     public function getNombre(): ?string
