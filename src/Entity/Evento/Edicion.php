@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Evento;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,6 +14,7 @@ class Edicion
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
@@ -100,6 +100,25 @@ class Edicion
     public function getSesiones(): ArrayCollection
     {
         return $this->sesiones;
+    }
+
+    /**
+     * @return Evento
+     */
+    public function getEvento(): Evento
+    {
+        return $this->evento;
+    }
+
+    /**
+     * @param Evento $evento
+     * @return Edicion
+     */
+    public function setEvento(Evento $evento): self
+    {
+        $this->evento = $evento;
+
+        return $this;
     }
 
 }

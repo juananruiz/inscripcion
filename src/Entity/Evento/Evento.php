@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Entity;
+namespace App\Entity\Evento;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +14,7 @@ class Evento
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
@@ -98,5 +98,21 @@ class Evento
         $this->url = $url;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDuracionEstimada()
+    {
+        return $this->duracionEstimada;
+    }
+
+    /**
+     * @param mixed $duracionEstimada
+     */
+    public function setDuracionEstimada($duracionEstimada): void
+    {
+        $this->duracionEstimada = $duracionEstimada;
     }
 }
