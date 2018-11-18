@@ -2,13 +2,21 @@
 
 namespace App\Entity\Persona;
 
-use App\Entity\Geo\{
-    Localidad, Provincia
-};
+use App\Entity\Geo\Provincia;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ */
 class Domicilio
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
     /**
      * @ORM\Column(type="string", nullable=false)
      * @var string
@@ -22,106 +30,86 @@ class Domicilio
     private $numero;
 
     /**
-     * @ORM\Column(type="int", nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      * @var int
      */
     private $codigoPostal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Geo\Localidad")
-     * @var Localidad
+     * @ORM\Column(type="string", nullable=false)
+     * @var string
      */
     private $localidad;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Geo|Provincia")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Geo\Provincia")
      * @var Provincia
      */
     private $provincia;
 
-    /**
-     * @return string
-     */
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getVia(): string
     {
         return $this->via;
     }
 
-    /**
-     * @param string $via
-     * @return Domicilio
-     */
     public function setVia(string $via): self
     {
         $this->via = $via;
+
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getNumero(): int
     {
         return $this->numero;
     }
 
-    /**
-     * @param int $numero
-     * @return Domicilio
-     */
     public function setNumero(int $numero): self
     {
         $this->numero = $numero;
+
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getCodigoPostal(): int
     {
         return $this->codigoPostal;
     }
 
-    /**
-     * @param int $codigoPostal
-     * @return Domicilio
-     */
     public function setCodigoPostal(int $codigoPostal): self
     {
         $this->codigoPostal = $codigoPostal;
+
         return $this;
     }
 
-    /**
-     * @return Localidad
-     */
-    public function getLocalidad(): Localidad
+    public function getLocalidad(): string
     {
         return $this->localidad;
     }
 
-    /**
-     * @param Localidad $localidad
-     */
-    public function setLocalidad(Localidad $localidad): void
+    public function setLocalidad(string $localidad): self
     {
         $this->localidad = $localidad;
+
+        return $this;
     }
 
-    /**
-     * @return Provincia
-     */
     public function getProvincia(): Provincia
     {
         return $this->provincia;
     }
 
-    /**
-     * @param Provincia $provincia
-     */
-    public function setProvincia(Provincia $provincia): void
+    public function setProvincia(Provincia $provincia): self
     {
         $this->provincia = $provincia;
+
+        return $this;
     }
 }

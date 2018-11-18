@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InscripcionRepository")
- * @ORM\Table(name="Inscripcion")
  */
 class Inscripcion
 {
@@ -21,7 +20,7 @@ class Inscripcion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Curso", inversedBy="inscripciones")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Curso\Curso", inversedBy="inscripciones")
      * @ORM\OrderBy({"nombre": "ASC"})
      * @var Curso
      */
@@ -46,8 +45,8 @@ class Inscripcion
     private $fechaBaja;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="inscripciones")
-     * @ORM\OrderBy({"lastName": "ASC")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Persona\Persona", inversedBy="inscripciones")
+     * @ORM\OrderBy({"lastName": "ASC"})
      * @var Persona
      */
     private $persona;
@@ -87,9 +86,11 @@ class Inscripcion
         return $this->fechaAlta;
     }
 
-    public function setFechaAlta(\DateTime $fechaAlta): void
+    public function setFechaAlta(\DateTime $fechaAlta): self
     {
         $this->fechaAlta = $fechaAlta;
+
+        return $this;
     }
 
     public function getFechaBaja(): \DateTime
@@ -97,9 +98,11 @@ class Inscripcion
         return $this->fechaBaja;
     }
 
-    public function setFechaBaja(\DateTime $fechaBaja): void
+    public function setFechaBaja(\DateTime $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
+
+        return $this;
     }
 
     public function getPersona(): Persona

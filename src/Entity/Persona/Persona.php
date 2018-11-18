@@ -2,6 +2,8 @@
 
 namespace App\Entity\Persona;
 
+use App\Entity\Inscripcion\Inscripcion;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,15 +39,28 @@ class Persona
     private $clave;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Domicilio")
+     * @ORM\OneToOne(targetEntity="App\Entity\Persona\Domicilio")
      * @var Domicilio
      */
     private $domicilio;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Perfil", mappedBy="persona", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Persona\Perfil", mappedBy="persona", cascade={"persist", "remove"})
      */
     private $perfil;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion\Inscripcion", mappedBy="persona")
+     * @ORM\OrderBy({"fechaAlta": "DESC"})
+     * @var Inscripcion[]|ArrayCollection
+     */
+    private $inscripciones;
+
+
+    public function __construct()
+    {
+        $this->inscripciones = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -167,5 +182,10 @@ class Persona
         }
 
         return $this;
+    }
+
+    public function getInscripciones(): ?ArrayCollection
+    {
+        return $this->inscripciones;
     }
 }

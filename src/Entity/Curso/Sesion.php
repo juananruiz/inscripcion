@@ -17,7 +17,7 @@ class Sesion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Curso", inversedBy="sesiones")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Curso\Curso", inversedBy="sesiones")
      * @var Curso
      */
     private $curso;

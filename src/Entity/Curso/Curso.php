@@ -2,6 +2,7 @@
 
 namespace App\Entity\Curso;
 
+use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,14 +30,14 @@ class Curso
     private $horas;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion\Inscripcion", mappedBy="curso"
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion\Inscripcion", mappedBy="curso")
      * @ORM\OrderBy({"fechaAlta": "DESC"})
      * @var Inscripcion[]|ArrayCollection
      */
     private $inscripciones;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sesion", mappedBy="curso")
+     * @ORM\OneToMany(targetEntity="App\Entity\Curso\Sesion", mappedBy="curso")
      * @ORM\OrderBy({"fechaInicio": "DESC"})
      * @var Sesion[]|ArrayCollection
      */

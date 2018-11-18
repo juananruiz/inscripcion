@@ -4,6 +4,9 @@ namespace App\Entity\Geo;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ */
 class Provincia
 {
     /**
