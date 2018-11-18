@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Entity\Evento;
+namespace App\Entity\Curso;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EventoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CursoRepository")
  */
-class Evento
+class Curso
 {
     /**
      * @ORM\Id()
@@ -24,16 +24,23 @@ class Evento
     private $descripcion;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="integer")
      */
-    private $duracionEstimada;
+    private $horas;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Edicion", mappedBy="evento")
-     * @ORM\OrderBy({"fechaInicio": "DESC"})
-     * @var Edicion[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion\Inscripcion", mappedBy="curso"
+     * @ORM\OrderBy({"fechaAlta": "DESC"})
+     * @var Inscripcion[]|ArrayCollection
      */
-    private $ediciones;
+    private $inscripciones;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sesion", mappedBy="curso")
+     * @ORM\OrderBy({"fechaInicio": "DESC"})
+     * @var Sesion[]|ArrayCollection
+     */
+    private $sesiones;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,7 +55,8 @@ class Evento
 
     public function __construct()
     {
-        $this->ediciones = new ArrayCollection();
+        $this->inscripciones = new ArrayCollection();
+        $this->sesiones = new ArrayCollection();
     }
 
     public function getId(): int
@@ -57,11 +65,11 @@ class Evento
     }
 
     /**
-     * @return Edicion[]|ArrayCollection
+     * @return Sesion[]|ArrayCollection
      */
-    public function getEdiciones(): ArrayCollection
+    public function getSesiones(): ArrayCollection
     {
-        return $this->ediciones;
+        return $this->sesiones;
     }
 
     public function getNombre(): ?string
@@ -100,19 +108,16 @@ class Evento
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDuracionEstimada()
+    public function getHoras(): int
     {
-        return $this->duracionEstimada;
+        return $this->horas;
     }
 
-    /**
-     * @param mixed $duracionEstimada
-     */
-    public function setDuracionEstimada($duracionEstimada): void
+
+    public function setHoras(int $horas): self
     {
-        $this->duracionEstimada = $duracionEstimada;
+        $this->horas = $horas;
+
+        return  $this;
     }
 }

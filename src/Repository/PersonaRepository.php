@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Persona;
+use App\Entity\Persona\Persona;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Evento;
+namespace App\Entity\Curso;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,10 +17,10 @@ class Sesion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Edicion", inversedBy="sesiones")
-     * @var Edicion
+     * @ORM\ManyToOne(targetEntity="App\Entity\Curso", inversedBy="sesiones")
+     * @var Curso
      */
-    private $edicion;
+    private $curso;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -38,9 +38,9 @@ class Sesion
         return $this->id;
     }
 
-    public function getEdicion(): Edicion
+    public function getCurso(): Curso
     {
-        return $this->edicion;
+        return $this->curso;
     }
 
     public function getFechaInicio(): ?\DateTimeInterface

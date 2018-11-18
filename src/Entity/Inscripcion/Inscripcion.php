@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity\Evento;
+namespace App\Entity\Inscripcion;
 
 use App\Entity\Persona\Persona;
+use App\Entity\Curso\Curso;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,64 +40,44 @@ class Inscripcion
     private $persona;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Edicion", inversedBy="inscripciones"
+     * @ORM\ManyToOne(targetEntity="App\Entity\Curso", inversedBy="inscripciones")
      * @ORM\OrderBy({"nombre": "ASC"})
-     * @var Edicion
+     * @var Curso
      */
-    private $edicion;
+    private $curso;
 
-    /**
-     * @return int
-     */
+
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getFechaAlta(): \DateTime
     {
         return $this->fechaAlta;
     }
 
-    /**
-     * @param \DateTime $fechaAlta
-     */
     public function setFechaAlta(\DateTime $fechaAlta): void
     {
         $this->fechaAlta = $fechaAlta;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getFechaBaja(): \DateTime
     {
         return $this->fechaBaja;
     }
 
-    /**
-     * @param \DateTime $fechaBaja
-     */
+
     public function setFechaBaja(\DateTime $fechaBaja): void
     {
         $this->fechaBaja = $fechaBaja;
     }
 
-    /**
-     * @return Persona
-     */
     public function getPersona(): Persona
     {
         return $this->persona;
     }
 
-    /**
-     * @param Persona $persona
-     * @return Inscripcion
-     */
     public function setPersona(Persona $persona): self
     {
         $this->persona = $persona;
@@ -104,21 +85,14 @@ class Inscripcion
         return $this;
     }
 
-    /**
-     * @return Edicion
-     */
-    public function getEdicion()
+    public function getCurso(): Curso
     {
-        return $this->edicion;
+        return $this->curso;
     }
 
-    /**
-     * @param Edicion $edicion
-     * @return Inscripcion
-     */
-    public function setEdicion($edicion): self
+    public function setEdicion(Curso $curso): self
     {
-        $this->edicion = $edicion;
+        $this->curso = $curso;
 
         return $this;
     }

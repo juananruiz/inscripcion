@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Evento\Inscripcion;
+use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

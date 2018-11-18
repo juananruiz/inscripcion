@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Edicion;
+use App\Entity\Curso\Curso;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Edicion|null find($id, $lockMode = null, $lockVersion = null)
- * @method Edicion|null findOneBy(array $criteria, array $orderBy = null)
- * @method Edicion[]    findAll()
- * @method Edicion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Curso|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Curso|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Curso[]    findAll()
+ * @method Curso[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EdicionRepository extends ServiceEntityRepository
+class CursoRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Edicion::class);
+        parent::__construct($registry, Curso::class);
     }
 
 //    /**
-//     * @return Edicion[] Returns an array of Edicion objects
+//     * @return Curso[] Returns an array of Curso objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EdicionRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Edicion
+    public function findOneBySomeField($value): ?Curso
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Sesion;
+use App\Entity\Curso\Sesion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
