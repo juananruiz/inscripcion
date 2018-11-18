@@ -21,6 +21,19 @@ class Inscripcion
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Curso", inversedBy="inscripciones")
+     * @ORM\OrderBy({"nombre": "ASC"})
+     * @var Curso
+     */
+    private $curso;
+
+    /*
+     * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion\Estado")
+     * @var Estado
+     */
+    private $estado;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
@@ -39,17 +52,34 @@ class Inscripcion
      */
     private $persona;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Curso", inversedBy="inscripciones")
-     * @ORM\OrderBy({"nombre": "ASC"})
-     * @var Curso
-     */
-    private $curso;
-
 
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getCurso(): Curso
+    {
+        return $this->curso;
+    }
+
+    public function setCurso(Curso $curso): self
+    {
+        $this->curso = $curso;
+
+        return $this;
+    }
+
+    public function getEstado(): Estado
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(Estado $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
     }
 
     public function getFechaAlta(): \DateTime
@@ -67,7 +97,6 @@ class Inscripcion
         return $this->fechaBaja;
     }
 
-
     public function setFechaBaja(\DateTime $fechaBaja): void
     {
         $this->fechaBaja = $fechaBaja;
@@ -81,18 +110,6 @@ class Inscripcion
     public function setPersona(Persona $persona): self
     {
         $this->persona = $persona;
-
-        return $this;
-    }
-
-    public function getCurso(): Curso
-    {
-        return $this->curso;
-    }
-
-    public function setEdicion(Curso $curso): self
-    {
-        $this->curso = $curso;
 
         return $this;
     }
