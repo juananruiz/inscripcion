@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class CursoController extends Controller
 {
     /**
-     * @Route("/listar", name="curso_listar"
+     * @Route("/listar", name="curso_listar")
      * @Route("/")
      */
     public function listar()
