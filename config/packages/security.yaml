@@ -1,5 +1,5 @@
 security:
-    encoder:
+    encoders:
         App\Entity\Usuario:
             algorithm: bcrypt
     providers:
@@ -15,20 +15,20 @@ security:
         main:
             anonymous: true
 
-    form_login:
-        login_path: login
-        check_path: login
+            form_login:
+                login_path: login
+                check_path: login
 
-        provider: base_de_datos
+                provider: base_de_datos
 
-        logout:
-            path:   /logout
-            target: /login
+            logout:
+                path:   /logout
+                target: /login
 
-        role_hierarchy:
-            ROLE_MEMBER: ROLER_USER
-            ROLE_ADMIN: ROLE_MEMBER
-            ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    role_hierarchy:
+        ROLE_MEMBER: ROLER_USER
+        ROLE_ADMIN: ROLE_MEMBER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

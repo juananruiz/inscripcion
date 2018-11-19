@@ -47,7 +47,7 @@ class Persona implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="json")
-     * @var array
+     * @var string
      */
     private $roles;
 
@@ -200,21 +200,8 @@ class Persona implements UserInterface, \Serializable
             ) = unserialize($serialized);
     }
 
-    /**
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return array('ROLE_USER');
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
+
+    public function getRoles(): string
     {
         $roles = $this->roles;
 
@@ -223,19 +210,16 @@ class Persona implements UserInterface, \Serializable
             $roles[] = 'ROLE_USER';
         }
 
-        return array_unique($roles);    }
+        return array_unique($roles);
+    }
 
     /**
-     * Returns the password used to authenticate the user.
-     *
      * This should be the encoded password. On authentication, a plain-text
      * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
      */
-    public function getPassword()
+    public function getPassword(): string
     {
-        // TODO: Implement getPassword() method.
+        return $this->getClave();
     }
 
     /**
