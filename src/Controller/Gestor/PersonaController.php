@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Gestor;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * @Route("/gestor/persona")
+ */
 class PersonaController extends Controller
 {
     /**
-     * @Route("/persona", name="persona")
+     * @Route("/listar", name="gestor_persona_listar")
+     * @Route("/")
      */
     public function index()
     {
-        return $this->render('persona/index.html.twig', [
+        return $this->render('gestor/persona/index.html.twig', [
             'controller_name' => 'PersonaController',
         ]);
     }
