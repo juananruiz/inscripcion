@@ -5,11 +5,12 @@ namespace App\Entity\Persona;
 use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonaRepository")
  */
-class Persona
+class Persona implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -45,9 +46,10 @@ class Persona
     private $domicilio;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Persona\Perfil", mappedBy="persona", cascade={"persist", "remove"})
+     * @ORM\Column(type="json")
+     * @var array
      */
-    private $perfil;
+    private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion\Inscripcion", mappedBy="persona")
@@ -166,26 +168,106 @@ class Persona
         return $this;
     }
 
-    public function getPerfil(): ?Perfil
-    {
-        return $this->perfil;
-    }
-
-    public function setPerfil(?Perfil $perfil): self
-    {
-        $this->perfil = $perfil;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newPersona = $perfil === null ? null : $this;
-        if ($newPersona !== $perfil->getPersona()) {
-            $perfil->setPersona($newPersona);
-        }
-
-        return $this;
-    }
-
     public function getInscripciones(): ?ArrayCollection
     {
         return $this->inscripciones;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->getId(),
+            $this->getCorreo(),
+            $this->getClave(),
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->correo,
+            $this->clave,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+
+        // guarantees that a user always has at least one role for security
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);    }
+
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        // TODO: Implement getPassword() method.
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername(): string
+    {
+        return $this->getCorreo();
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
