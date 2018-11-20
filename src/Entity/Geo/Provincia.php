@@ -23,30 +23,38 @@ class Provincia
      */
     private $nombre;
 
-
     /**
-     * @return int
+     * @ORM\Column(type="string")
+     * @var string
      */
+    private $slug;
+
+
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getNombre(): string
     {
         return $this->nombre;
     }
 
-    /**
-     * @param string $nombre
-     * @return Provincia
-     */
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

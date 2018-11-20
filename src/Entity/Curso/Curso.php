@@ -2,6 +2,7 @@
 
 namespace App\Entity\Curso;
 
+use App\Entity\Geo\Sala;
 use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -37,6 +38,12 @@ class Curso
     private $inscripciones;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Geo\Sala")
+     * @var Sala
+     */
+    private $sala;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Curso\Sesion", mappedBy="curso")
      * @ORM\OrderBy({"fechaInicio": "DESC"})
      * @var Sesion[]|ArrayCollection
@@ -63,14 +70,6 @@ class Curso
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Sesion[]|ArrayCollection
-     */
-    public function getSesiones(): ArrayCollection
-    {
-        return $this->sesiones;
     }
 
     public function getNombre(): ?string
@@ -114,11 +113,27 @@ class Curso
         return $this->horas;
     }
 
-
     public function setHoras(int $horas): self
     {
         $this->horas = $horas;
 
-        return  $this;
+        return $this;
+    }
+
+    public function getSala(): Sala
+    {
+        return $this->sala;
+    }
+
+    public function setSala(Sala $sala): self
+    {
+        $this->sala = $sala;
+
+        return $this;
+    }
+
+    public function getSesiones(): ArrayCollection
+    {
+        return $this->sesiones;
     }
 }

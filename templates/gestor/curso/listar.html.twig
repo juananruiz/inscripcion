@@ -34,7 +34,7 @@
                     <td><a class="badge badge-primary" href="{{ path('gestor_curso_editar', {'id': curso.id}) }}" >{{ curso.id }}</a></td>
                     <td>{{ curso.nombre }}</td>
                     <td>{{ curso.horas }}</td>
-                    <td>{{ curso.lugar }}</td>
+                    <td>{{ curso.sala }}</td>
                     <td><a href="{{ path('gestor_curso_borrar', {'id': curso.id}) }}"><span data-feather="trash"></span></a></td>
                 </tr>
             {% endfor %}

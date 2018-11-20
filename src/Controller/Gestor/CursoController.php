@@ -4,6 +4,7 @@ namespace App\Controller\Gestor;
 
 use App\Entity\Curso\Curso;
 use App\Repository\CursoRepository;
+use App\Repository\SalaRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,11 +43,11 @@ class CursoController extends Controller
     /**
      * @Route("/crear", name="gestor_curso_crear")
      */
-    public function crear()
+    public function crear(SalaRepository $salaRepository)
     {
-        $lugares = ['1' => 'Sevilla', '2' => 'Madrid'];
+        $salas = $salaRepository->findAll();
         return $this->render('gestor/curso/crear.html.twig', [
-            'lugares' => $lugares,
+            'salas' => $salas,
         ]);
     }
 
