@@ -19,6 +19,28 @@ class CursoRepository extends ServiceEntityRepository
         parent::__construct($registry, Curso::class);
     }
 
+    /**
+     * @param Curso $curso
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Curso $curso)
+    {
+        parent::getEntityManager()->remove($curso);
+        parent::getEntityManager()->flush();
+    }
+
+    /**
+     * @param Curso $curso
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Curso $curso)
+    {
+        parent::getEntityManager()->persist($curso);
+        parent::getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return Curso[] Returns an array of Curso objects
 //     */

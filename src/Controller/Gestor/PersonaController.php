@@ -20,4 +20,15 @@ class PersonaController extends Controller
             'controller_name' => 'PersonaController',
         ]);
     }
+
+    /**
+     * @Route("/crearr", name="gestor_persona_crear")
+     * @Route("/")
+     */
+    public function crear()
+    {
+        return $this->render('gestor/persona/index.html.twig', [
+            'controller_name' => 'PersonaController',
+        ]);
+    }
 }
