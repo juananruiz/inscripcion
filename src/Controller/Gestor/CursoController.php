@@ -7,9 +7,9 @@ use App\Repository\CursoRepository;
 use App\Repository\SalaRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route("/gestor/curso")
@@ -26,7 +26,7 @@ class CursoController extends Controller
     {
         $this->repository = $repository;
     }
-    
+
     /**
      * @Route("/listar", name="gestor_curso_listar")
      * @Route("/")
@@ -59,9 +59,29 @@ class CursoController extends Controller
         $curso = $this->repository->find($id);
         $salas = $salaRepository->findAll();
         return $this->render('gestor/curso/editar.html.twig', [
-            'curso'=> $curso,
+            'curso' => $curso,
             'salas' => $salas,
         ]);
+    }
+
+
+    /**
+     * @Route("/grabar", name="gestor_curso_grabar")
+     */
+    public function grabar(Request $request, SalaRepository $salaRepository)
+    {
+        if ($id = $request->get('id')) {
+            $curso = $this->repository->find($id);
+        } else {
+            $curso = new Curso();
+        }
+        $sala = $salaRepository->find($request->get('sala_id'));
+        $curso->setNombre($request->get('nombre'));
+        $curso->setHoras($request->get('horas'));
+        $curso->setSala($sala);
+        $this->repository->save($curso);
+
+        return $this->redirectToRoute("gestor_curso_listar");
     }
 
     /**
@@ -77,24 +97,5 @@ class CursoController extends Controller
         }
 
         return $this->redirectToRoute('gestor_curso_listar');
-    }
-
-    /**
-     * @Route("/grabar", name="gestor_curso_grabar")
-     */
-    public function grabar(Request $request)
-    {
-        if ($id = $request->get('id')) {
-            $curso = $this->repository->find($id);
-        } else {
-            $curso = new Curso();
-        }
-
-        $curso->setNombre($request->get('nombre'));
-        $curso->setHoras($request->get('horas'));
-//        $curso->setLugar($request->get('lugar'));
-        $this->repository->save($curso);
-
-        return $this->redirectToRoute("gestor_curso_listar");
     }
 }
