@@ -32,6 +32,11 @@ class Sesion
      */
     private $fechaFin;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $duracion;
+
 
     public function getId()
     {
@@ -63,6 +68,18 @@ class Sesion
     public function setFechaFin(?\DateTimeInterface $fechaFin): self
     {
         $this->fechaFin = $fechaFin;
+
+        return $this;
+    }
+
+    public function getDuracion(): ?\DateTimeInterface
+    {
+        return $this->duracion;
+    }
+
+    public function setDuracion(\DateTimeInterface $duracion): self
+    {
+        $this->duracion = $duracion;
 
         return $this;
     }

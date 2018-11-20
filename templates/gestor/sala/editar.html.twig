@@ -1,0 +1,49 @@
+{% extends 'gestor/layout_dashboard.html.twig' %}
+{% set titulo = 'Editar curso' %}
+
+{% block contenido %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ titulo }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-8 order-md-1">
+        <form class="form" action="{{ path('gestor_curso_grabar') }}" method="post">
+            <input type="hidden" name="id" value="{{ curso.id }}">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input class="form-control" name="nombre" type="text" value="{{ curso.nombre }}">
+            </div>
+
+            <div class="form-group">
+                <label for="sala_id">Lugar</label>
+                <select class="form-control" name="sala_id">
+                    <option value="">Elige el lugar de impartación del curso</option>
+                    {% for sala in salas %}
+                        <option value="{{ sala.id }}"
+                                {% if curso.sala.id == sala.id %}selected{% endif %}>{{ sala.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="horas">Duración (horas)</label>
+                <input class="form-control" name="horas" type="number" value="{{ curso.horas }}">
+            </div>
+
+            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Grabar Curso">
+
+        </form>
+    </div>
+{% endblock %}
+
+

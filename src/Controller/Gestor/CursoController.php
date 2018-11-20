@@ -41,6 +41,18 @@ class CursoController extends Controller
     }
 
     /**
+     * @Route("/mostrar/{id}", requirements={"id": "\d+"}, name="gestor_curso_mostrar")
+     */
+    public function mostrar($id)
+    {
+        $curso = $this->repository->find($id);
+        return $this->render('gestor/curso/mostrar.html.twig', [
+            'curso' => $curso,
+        ]);
+    }
+
+
+    /**
      * @Route("/crear", name="gestor_curso_crear")
      */
     public function crear(SalaRepository $salaRepository)
