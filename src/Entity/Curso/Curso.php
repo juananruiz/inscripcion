@@ -120,7 +120,7 @@ class Curso
         return $this;
     }
 
-    public function getSala(): Sala
+    public function getSala(): ?Sala
     {
         return $this->sala;
     }

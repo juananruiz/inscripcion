@@ -54,13 +54,13 @@ class CursoController extends Controller
     /**
      * @Route("/editar/{id}", requirements={"id": "\d+"}, name="gestor_curso_editar")
      */
-    public function editar($id)
+    public function editar($id, SalaRepository $salaRepository)
     {
         $curso = $this->repository->find($id);
-        $lugares = ['1' => 'Sevilla', '2' => 'Madrid'];
+        $salas = $salaRepository->findAll();
         return $this->render('gestor/curso/editar.html.twig', [
             'curso'=> $curso,
-            'lugares' => $lugares
+            'salas' => $salas,
         ]);
     }
 
