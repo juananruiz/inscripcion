@@ -19,11 +19,30 @@ class SesionRepository extends ServiceEntityRepository
         parent::__construct($registry, Sesion::class);
     }
 
-//    /**
-//     * @return Sesion[] Returns an array of Sesion objects
-//     */
+    /**
+     * @param Sesion $sesion
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Sesion $sesion)
+    {
+        parent::getEntityManager()->remove($sesion);
+        parent::getEntityManager()->flush();
+    }
+
+    /**
+     * @param Sesion $sesion
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Sesion $sesion)
+    {
+        parent::getEntityManager()->persist($sesion);
+        parent::getEntityManager()->flush();
+    }
+
     /*
-    public function findByExampleField($value)
+    public function findByExampleField($value): Sesion
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

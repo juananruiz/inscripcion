@@ -40,17 +40,6 @@ class SesionController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/mostrar/{id}", requirements={"id": "\d+"}, name="gestor_sesion_mostrar")
-     */
-    public function mostrar($id)
-    {
-        $sesion = $this->repository->find($id);
-        return $this->render('gestor/sesion/mostrar.html.twig', [
-            'sesion' => $sesion,
-        ]);
-    }
-
 
     /**
      * @Route("/crear", name="gestor_sesion_crear")
@@ -88,9 +77,8 @@ class SesionController extends Controller
             $sesion = new Sesion();
         }
         $sala = $salaRepository->find($request->get('sala_id'));
-        $sesion->setNombre($request->get('nombre'));
-        $sesion->setHoras($request->get('horas'));
-        $sesion->setSala($sala);
+        $sesion->setFechaInicio($request->get('nombre'));
+        $sesion->setDuracion($request->get('horas'));
         $this->repository->save($sesion);
 
         return $this->redirectToRoute("gestor_sesion_listar");
