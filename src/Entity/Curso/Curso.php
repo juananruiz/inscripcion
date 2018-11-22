@@ -5,6 +5,7 @@ namespace App\Entity\Curso;
 use App\Entity\Geo\Sala;
 use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,8 +64,8 @@ class Curso
 
     public function __construct()
     {
-        $this->inscripciones = new ArrayCollection();
-        $this->sesiones = new ArrayCollection();
+//        $this->inscripciones = new ArrayCollection();
+//        $this->sesiones = new ArrayCollection();
     }
 
     public function getId(): int
@@ -132,7 +133,7 @@ class Curso
         return $this;
     }
 
-    public function getSesiones(): ArrayCollection
+    public function getSesiones(): Collection
     {
         return $this->sesiones;
     }
