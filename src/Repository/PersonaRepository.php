@@ -18,6 +18,28 @@ class PersonaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Persona::class);
     }
+    
+    /**
+     * @param Persona $persona
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Persona $persona)
+    {
+        parent::getEntityManager()->remove($persona);
+        parent::getEntityManager()->flush();
+    }
+
+    /**
+     * @param Persona $persona
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Persona $persona)
+    {
+        parent::getEntityManager()->persist($persona);
+        parent::getEntityManager()->flush();
+    }
 
 //    /**
 //     * @return Persona[] Returns an array of Persona objects

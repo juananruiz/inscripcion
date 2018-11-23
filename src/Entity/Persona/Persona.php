@@ -58,6 +58,11 @@ class Persona implements UserInterface, \Serializable
      */
     private $inscripciones;
 
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $telefono;
+
 
     public function __construct()
     {
@@ -253,5 +258,17 @@ class Persona implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getTelefono(): ?string
+    {
+        return $this->telefono;
+    }
+
+    public function setTelefono(?string $telefono): self
+    {
+        $this->telefono = $telefono;
+
+        return $this;
     }
 }
