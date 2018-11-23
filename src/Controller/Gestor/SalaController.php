@@ -40,7 +40,6 @@ class SalaController extends Controller
         ]);
     }
 
-
     /**
      * @Route("/crear", name="gestor_sala_crear")
      * @param ProvinciaRepository $provinciaRepository
@@ -70,7 +69,6 @@ class SalaController extends Controller
         ]);
     }
 
-
     /**
      * @Route("/grabar", name="gestor_sala_grabar")
      * @param Request $request
@@ -87,10 +85,11 @@ class SalaController extends Controller
             $sala = new Sala();
         }
         $provincia = $provinciaRepository->find($request->get('provincia_id'));
+        $sala->setAforo((int)$request->get('aforo'));
         $sala->setNombre($request->get('nombre'));
         $sala->setDireccion($request->get('direccion'));
         $sala->setLocalidad($request->get('localidad'));
-        $sala->setProvincia($provincia);
+        $sala->setProvincia($provincia) ;
         $sala->setMapaUrl($request->get('mapa_url'));
         $this->repository->save($sala);
 

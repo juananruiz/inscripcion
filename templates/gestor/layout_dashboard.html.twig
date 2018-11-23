@@ -48,7 +48,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ path('gestor_sala_listar') }}">
                             <span data-feather="home"></span>
                             Aulas
                         </a>
@@ -69,6 +69,12 @@
                         <a class="nav-link" href="{{ path('gestor_persona_crear') }}">
                             <span data-feather="plus-circle"></span>
                             Nuevo usuario
+                        </a>
+                    </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ path('gestor_sala_crear') }}">
+                            <span data-feather="plus-circle"></span>
+                            Nueva sala
                         </a>
                     </li>
                 </ul>

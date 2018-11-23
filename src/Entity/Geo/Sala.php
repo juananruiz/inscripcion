@@ -47,6 +47,11 @@ class Sala
      */
     private $provincia;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $aforo;
+
 
     public function getId(): int
     {
@@ -109,6 +114,18 @@ class Sala
     public function setProvincia(Provincia $provincia): self
     {
         $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getAforo(): ?int
+    {
+        return $this->aforo;
+    }
+
+    public function setAforo(?int $aforo): self
+    {
+        $this->aforo = $aforo;
 
         return $this;
     }

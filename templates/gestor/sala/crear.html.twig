@@ -4,16 +4,6 @@
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ titulo }}</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
-        </div>
     </div>
 
     <div class="col-md-8 order-md-1">
@@ -24,17 +14,32 @@
             </div>
 
             <div class="form-group">
-                <label for="sala_id">Lugar</label>
-                <select class="form-control" name="sala_id">
-                    {% for sala in salas %}
-                        <option value="{{ sala.id }}">{{ sala.nombre }}</option>
+                <label for="direccion">Dirección</label>
+                <input class="form-control" name="direccion" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="provincia_id">Provincia</label>
+                <select class="form-control" name="provincia_id">
+                    {% for provincia in provincias %}
+                        <option value="{{ provincia.id }}">{{ provincia.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="horas">Duración (horas)</label>
-                <input class="form-control" name="horas" type="number">
+                <label for="localidad">Localidad</label>
+                <input class="form-control" name="localidad" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="mapa_url">URL Mapa</label>
+                <input class="form-control" name="mapa_url" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="aforo">Aforo</label>
+                <input class="form-control" name="aforo" type="number">
             </div>
 
             <button class="btn btn-primary btn-lg btn-block" type="submit">Grabar Sala</button>

@@ -1,5 +1,5 @@
 {% extends 'gestor/layout_dashboard.html.twig' %}
-{% set titulo = 'Listado de Cursos' %}
+{% set titulo = 'Listado de Aulas' %}
 
 
 {% block contenido %}
@@ -7,8 +7,8 @@
         <h1 class="h2">{{ titulo }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary"><a  href="{{ path('gestor_curso_crear') }}"><span
-                                data-feather="plus-circle"></span> Crear Curso</a></button>
+                <a  href="{{ path('gestor_sala_crear') }}" class="btn btn-sm btn-primary"><span
+                                data-feather="plus-circle"></span> Añadir Aula</a>
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
             <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -24,18 +24,20 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Duración</th>
-                <th>Lugar</th>
+                <th>Provincia</th>
+                <th>Mapa</th>
+                <th>Aforo</th>
             </tr>
             </thead>
             <tbody>
-            {% for curso in cursos %}
+            {% for sala in salas %}
                 <tr>
-                    <td><a class="badge badge-primary" href="{{ path('gestor_curso_editar', {'id': curso.id}) }}" >{{ curso.id }}</a></td>
-                    <td>{{ curso.nombre }}</td>
-                    <td>{{ curso.horas }}</td>
-                    <td>{{ curso.sala.provincia.nombre }}</td>
-                    <td><a href="{{ path('gestor_curso_borrar', {'id': curso.id}) }}"><span data-feather="trash"></span></a></td>
+                    <td><a class="badge badge-primary" href="{{ path('gestor_sala_editar', {'id': sala.id}) }}" >{{ sala.id }}</a></td>
+                    <td>{{ sala.nombre }}</td>
+                    <td>{{ sala.provincia.nombre }}</td>
+                    <td>{% if sala.mapaUrl %}<a href ="{{ sala.mapaUrl }}"><span data-feather="map-pin"></span></a>{% endif %}</td>
+                    <td>{{ sala.aforo }}</td>
+                    <td><a href="{{ path('gestor_sala_borrar', {'id': sala.id}) }}"><span data-feather="trash"></span></a></td>
                 </tr>
             {% endfor %}
             </tbody>
