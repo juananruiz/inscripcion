@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="horas">Duración (horas)</label>
-                <input class="form-control" name="horas" type="number" value="{{ curso.horas }}">
+                <input class="form-control" name="horas" type="number" value="{{ curso.horas }}" max="100" min="0">
             </div>
 
             <input class="btn btn-primary btn-lg btn-block" type="submit" value="Grabar Curso">
