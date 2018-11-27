@@ -46,7 +46,7 @@ class Curso
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Curso\Sesion", mappedBy="curso")
-     * @ORM\OrderBy({"fechaInicio": "DESC"})
+     * @ORM\OrderBy({"fechaInicio": "ASC"})
      * @var Sesion[]|ArrayCollection
      */
     private $sesiones;
@@ -60,6 +60,11 @@ class Curso
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $plazas;
 
 
     public function __construct()
@@ -136,5 +141,17 @@ class Curso
     public function getSesiones(): Collection
     {
         return $this->sesiones;
+    }
+
+    public function getPlazas(): ?int
+    {
+        return $this->plazas;
+    }
+
+    public function setPlazas(int $plazas): self
+    {
+        $this->plazas = $plazas;
+
+        return $this;
     }
 }

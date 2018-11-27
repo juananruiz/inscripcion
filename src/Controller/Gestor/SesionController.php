@@ -3,6 +3,7 @@
 namespace App\Controller\Gestor;
 
 use App\Entity\Curso\Sesion;
+use App\Repository\CursoRepository;
 use App\Repository\SesionRepository;
 use App\Repository\SalaRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -69,19 +70,23 @@ class SesionController extends Controller
     /**
      * @Route("/grabar", name="gestor_sesion_grabar")
      */
-    public function grabar(Request $request, SalaRepository $salaRepository)
+    public function grabar(Request $request, CursoRepository $cursoRepository)
     {
         if ($id = $request->get('id')) {
             $sesion = $this->repository->find($id);
         } else {
             $sesion = new Sesion();
         }
-        $sala = $salaRepository->find($request->get('sala_id'));
-        $sesion->setFechaInicio($request->get('nombre'));
-        $sesion->setDuracion($request->get('horas'));
+        if (!$curso_id = $request->get('curso_id')){
+            return $this->redirectToRoute("gestor_curso_listar");
+        }
+        $curso = $cursoRepository->find($curso_id);
+        $sesion->setCurso($curso)
+            ->setFechaInicio(new \DateTime($request->get('fecha_inicio')))
+            ->setDuracion(new \DateTime($request->get('duracion')));
         $this->repository->save($sesion);
 
-        return $this->redirectToRoute("gestor_sesion_listar");
+        return $this->redirectToRoute("gestor_curso_mostrar", ['id' => $curso_id]);
     }
 
     /**

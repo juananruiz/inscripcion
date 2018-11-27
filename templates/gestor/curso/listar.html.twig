@@ -24,6 +24,8 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Plazas</th>
+                <th>Inscritos</th>
                 <th>Duración</th>
                 <th>Lugar</th>
             </tr>
@@ -31,9 +33,11 @@
             <tbody>
             {% for curso in cursos %}
                 <tr>
-                    <td><a class="badge badge-primary" href="{{ path('gestor_curso_editar', {'id': curso.id}) }}" >{{ curso.id }}</a></td>
+                    <td><a class="badge badge-primary" href="{{ path('gestor_curso_mostrar', {'id': curso.id}) }}" >{{ curso.id }}</a></td>
                     <td>{{ curso.nombre }}</td>
-                    <td>{{ curso.horas }}</td>
+                    <td>{{ curso.plazas }}</td>
+                    <td></td>
+                    <td>{{ curso.horas }}h</td>
                     <td>{{ curso.sala.provincia.nombre }}</td>
                     <td><a href="{{ path('gestor_curso_borrar', {'id': curso.id}) }}"><span data-feather="trash"></span></a></td>
                 </tr>

@@ -6,9 +6,9 @@
         <h1 class="h2">{{ titulo }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary"><a href="{{ path('gestor_curso_editar', {'id': curso.id}) }}"><span
-                                data-feather="plus-circle"></span> Editar datos del curso</a></button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+                <button class="btn btn-sm btn-outline-secondary"><a
+                            href="{{ path('gestor_curso_editar', {'id': curso.id}) }}"><span
+                                data-feather="plus-circle"></span> Editar curso</a></button>
             </div>
             <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
@@ -17,25 +17,25 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-group">
-            <label for="nombre">ID</label>
-            <input class="form-control" name="id" value="{{ curso.id }}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input class="form-control" name="nombre" value="{{ curso.nombre }}" disabled>
-        </div>
-
-        <div class="form-group">
-            <label for="sala">Lugar</label>
-            <input class="form-control" name="sala" value="{{ curso.sala.nombre }}" disabled>
-        </div>
-
-        <div class="form-group">
-            <label for="horas">Duración (horas)</label>
-            <input class="form-control" name="horas" value="{{ curso.horas }}" disabled>
-        </div>
+    <div class="table-dark">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Aula</th>
+                <th>Plazas</th>
+                <th>Inscritos</th>
+                <th>Duración</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ curso.sala.nombre }}</td>
+                <td>{{ curso.plazas }}</td>
+                <td>{{ curso.plazas }}</td>
+                <td>{{ curso.horas }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="table-responsive">
@@ -54,14 +54,35 @@
                 <tr>
                     <td><a class="badge badge-primary"
                            href="{{ path('gestor_sesion_editar', {'id': sesion.id}) }}">{{ sesion.id }}</a></td>
-                    <td>{{ sesion.fechaInicio|date('d-m-Y') }}</td>
+                    <td>{{ sesion.fechaInicio|date('d/m/Y') }}</td>
                     <td>{{ sesion.fechaInicio|date('H:i') }}</td>
-                    <td>{{ sesion.duracion|date('H:m') }}</td>
-                    <td><a href="{{ path('gestor_sesion_borrar', {'id': curso.id}) }}"><span data-feather="trash"></span></a>
+                    <td>{{ sesion.duracion|date('H:i') }}</td>
+                    <td><a href="{{ path('gestor_sesion_borrar', {'id': curso.id}) }}"><span
+                                    data-feather="trash"></span></a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <div class="col-md-12">
+        <form class="form" action="{{ path('gestor_sesion_grabar') }}" method="post">
+            <input type="hidden" name="curso_id" value="{{ curso.id }}">
+            <div class="form-row">
+                <div class="form-group offset-1 col-md-5">
+                    <label for="fecha_inicio">Fecha y hora inicio</label>
+                    <input class="form-control" name="fecha_inicio" type="datetime-local">
+                </div>
+                <div class="form-group offset-1 col-md-2">
+                    <label for="duracion">Duración</label>
+                    <input class="form-control" name="duracion" type="time">
+                </div>
+                <div class="form-group offset-1 col-md-2">
+                    <label>&nbsp;</label>
+                    <button class="form-control btn btn-primary" type="submit">Agregar Sesión</button>
+                </div>
+            </div>
+        </form>
     </div>
 {% endblock %}

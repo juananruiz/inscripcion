@@ -88,8 +88,9 @@ class CursoController extends Controller
             $curso = new Curso();
         }
         $sala = $salaRepository->find($request->get('sala_id'));
-        $curso->setNombre($request->get('nombre'));
         $curso->setHoras($request->get('horas'));
+        $curso->setNombre($request->get('nombre'));
+        $curso->setPlazas($request->get('plazas'));
         $curso->setSala($sala);
         $this->repository->save($curso);
 

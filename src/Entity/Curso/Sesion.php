@@ -43,9 +43,16 @@ class Sesion
         return $this->id;
     }
 
-    public function getCurso(): Curso
+    public function getCurso() : Curso
     {
         return $this->curso;
+    }
+
+    public function setCurso($curso) : self
+    {
+        $this->curso = $curso;
+
+        return $this;
     }
 
     public function getFechaInicio(): ?\DateTimeInterface
@@ -53,7 +60,7 @@ class Sesion
         return $this->fechaInicio;
     }
 
-    public function setFechaInicio(?\DateTimeInterface $fechaInicio): self
+    public function setFechaInicio(?\DateTimeInterface $fechaInicio) : self
     {
         $this->fechaInicio = $fechaInicio;
 
@@ -65,19 +72,19 @@ class Sesion
         return $this->fechaFin;
     }
 
-    public function setFechaFin(?\DateTimeInterface $fechaFin): self
+    public function setFechaFin(?\DateTimeInterface $fechaFin) : self
     {
         $this->fechaFin = $fechaFin;
 
         return $this;
     }
 
-    public function getDuracion(): ?\DateTimeInterface
+    public function getDuracion() : ?\DateTimeInterface
     {
         return $this->duracion;
     }
 
-    public function setDuracion(\DateTimeInterface $duracion): self
+    public function setDuracion(\DateTimeInterface $duracion) : self
     {
         $this->duracion = $duracion;
 
