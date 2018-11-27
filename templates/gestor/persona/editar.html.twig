@@ -1,47 +1,73 @@
 {% extends 'gestor/layout_dashboard.html.twig' %}
-{% set titulo = 'Editar ' ~ sala.nombre %}
+{% set titulo = 'Editar ' ~ persona.nombre ~ ' ' ~ persona.apellidos %}
 
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ titulo }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a href="{{ path('gestor_persona_listar') }}" class="btn btn-sm btn-danger"><span
+                            data-feather="arrow-left-circle"></span> Cancelar y volver</a>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
     </div>
 
     <div class="col-md-8 order-md-1">
-        <form class="form" action="{{ path('gestor_sala_grabar') }}" method="post">
-            <input type="hidden" name="id" value="{{ sala.id }}">
+        <form class="form" action="{{ path('gestor_persona_grabar') }}" method="post">
+            <input type="hidden" name="id" value="{{ persona.id }}">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input class="form-control" name="nombre" type="text" value="{{ sala.nombre }}">
+                <input class="form-control" name="nombre" type="text" value="{{ persona.nombre }}">
             </div>
 
             <div class="form-group">
-                <label for="direccion">Dirección</label>
-                <input class="form-control" name="direccion" type="text" value="{{ sala.direccion }}">
+                <label for="nombre">Apellidos</label>
+                <input class="form-control" name="apellidos" type="text" value="{{ persona.apellidos }}">
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo</label>
+                <input class="form-control" name="correo" type="email" value="{{ persona.correo }}">
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input class="form-control" name="telefono" type="text" value="{{ persona.telefono }}">
+            </div>
+
+            <div class="form-group">
+                <label for="via">Vía</label>
+                <input class="form-control" name="via" type="text" value="{{ persona.domicilio.via }}">
+            </div>
+
+           <div class="form-group">
+                <label for="numero">Número</label>
+                <input class="form-control" name="numero" type="text" value="{{ persona.domicilio.numero }}">
+            </div>
+
+            <div class="form-group">
+                <label for="localidad">Localidad</label>
+                <input class="form-control" name="localidad" type="text" value="{{ persona.domicilio.localidad }}">
             </div>
 
             <div class="form-group">
                 <label for="provincia_id">Provincia</label>
                 <select class="form-control" name="provincia_id">
+                    <option value=""></option>
                     {% for provincia in provincias %}
                         <option value="{{ provincia.id }}"
-                                {% if sala.provincia.id == provincia.id %}selected{% endif %}>{{ provincia.nombre }}</option>
+                                {% if persona.domicilio.provincia and persona.domicilio.provincia.id == provincia.id %}selected{% endif %}>{{ provincia.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="localidad">Localidad</label>
-                <input class="form-control" name="localidad" type="text" value="{{ sala.localidad }}">
-            </div>
-
-            <div class="form-group">
-                <label for="mapa_url">URL Mapa</label>
-                <input class="form-control" name="mapa_url" type="url" value="{{ sala.mapaUrl }}">
-            </div>
-
-            <div class="form-group">
-                <label for="aforo">Aforo</label>
-                <input class="form-control" name="aforo" type="number" value="{{ sala.aforo }}" max="1000" min="0">
+                <label for="codigo_postal">Código Postal</label>
+                <input class="form-control" name="codigo_postal" type="text" value="{{ persona.domicilio.codigoPostal }}">
             </div>
 
             <button class="btn btn-primary btn-lg btn-block" type="submit">Guardar Cambios</button>
