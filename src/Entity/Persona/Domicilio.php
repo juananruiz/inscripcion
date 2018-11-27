@@ -18,25 +18,25 @@ class Domicilio
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     private $via;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @var int
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     private $numero;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @var int
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     private $codigoPostal;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     private $localidad;
@@ -53,55 +53,55 @@ class Domicilio
         return $this->id;
     }
 
-    public function getVia(): string
+    public function getVia(): ?string
     {
         return $this->via;
     }
 
-    public function setVia(string $via): self
+    public function setVia(?string $via): self
     {
         $this->via = $via;
 
         return $this;
     }
 
-    public function getNumero(): int
+    public function getNumero(): ?string
     {
         return $this->numero;
     }
 
-    public function setNumero(int $numero): self
+    public function setNumero(?string $numero): self
     {
         $this->numero = $numero;
 
         return $this;
     }
 
-    public function getCodigoPostal(): int
+    public function getCodigoPostal(): ?string
     {
         return $this->codigoPostal;
     }
 
-    public function setCodigoPostal(int $codigoPostal): self
+    public function setCodigoPostal(?string $codigoPostal): self
     {
         $this->codigoPostal = $codigoPostal;
 
         return $this;
     }
 
-    public function getLocalidad(): string
+    public function getLocalidad(): ?string
     {
         return $this->localidad;
     }
 
-    public function setLocalidad(string $localidad): self
+    public function setLocalidad(?string $localidad): self
     {
         $this->localidad = $localidad;
 
         return $this;
     }
 
-    public function getProvincia(): Provincia
+    public function getProvincia(): ?Provincia
     {
         return $this->provincia;
     }

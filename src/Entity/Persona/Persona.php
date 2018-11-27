@@ -35,18 +35,18 @@ class Persona implements UserInterface, \Serializable
     private $correo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $clave;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Persona\Domicilio")
+     * @ORM\OneToOne(targetEntity="App\Entity\Persona\Domicilio", cascade={"persist"})
      * @var Domicilio
      */
     private $domicilio;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      * @var string
      */
     private $roles;
@@ -154,10 +154,8 @@ class Persona implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return Domicilio
-     */
-    public function getDomicilio(): Domicilio
+
+    public function getDomicilio(): ?Domicilio
     {
         return $this->domicilio;
     }
