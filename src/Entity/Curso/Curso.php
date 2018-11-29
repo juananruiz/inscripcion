@@ -69,8 +69,8 @@ class Curso
 
     public function __construct()
     {
-//        $this->inscripciones = new ArrayCollection();
-//        $this->sesiones = new ArrayCollection();
+        $this->inscripciones = new ArrayCollection();
+        $this->sesiones = new ArrayCollection();
     }
 
     public function getId(): int
@@ -100,6 +100,16 @@ class Curso
         $this->descripcion = $descripcion;
 
         return $this;
+    }
+
+    public function getInscripciones() : Collection
+    {
+        return $this->inscripciones;
+    }
+
+    public function addInscripcion(Inscripcion $inscripcion): void
+    {
+        $this->inscripciones[] = $inscripcion;
     }
 
     public function getUrl(): ?string
