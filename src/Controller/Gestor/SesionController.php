@@ -31,6 +31,19 @@ class SesionController extends Controller
     }
 
     /**
+     * @Route("/editar/{id}", requirements={"id": "\d+"}, name="gestor_sesion_editar")
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editar(int $id)
+    {
+        $sesion = $this->repository->find($id);
+        return $this->render('gestor/sesion/editar.html.twig', [
+            'sesion' => $sesion,
+        ]);
+    }
+
+    /**
      * @Route("/grabar", name="gestor_sesion_grabar")
      * @param Request $request
      * @param CursoRepository $cursoRepository
@@ -67,12 +80,13 @@ class SesionController extends Controller
     public function borrar(int $id)
     {
         $sesion = $this->repository->find($id);
+
         try {
             $this->repository->delete($sesion);
         } catch (OptimisticLockException $e) {
         } catch (ORMException $e) {
         }
 
-        return $this->redirectToRoute('gestor_sesion_listar');
+        return $this->redirectToRoute('gestor_curso_mostrar', ['id' => $sesion->getCurso()->getId()]);
     }
 }

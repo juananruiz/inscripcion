@@ -21,9 +21,8 @@
             <input type="hidden" name="id" value="{{ curso.id }}">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input class="form-control" name="nombre" type="text" value="{{ curso.nombre }}">
+                <input class="form-control" name="nombre" type="text" value="{{ curso.nombre }}" required >
             </div>
-
             <div class="form-group">
                 <label for="sala_id">Lugar</label>
                 <select class="form-control" name="sala_id">
@@ -34,21 +33,17 @@
                     {% endfor %}
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="horas">Duración (horas)</label>
-                <input class="form-control" name="horas" type="number" value="{{ curso.horas }}" max="100" min="0">
+                <input class="form-control" name="horas" type="number" value="{{ curso.horas }}" required
+                       max="100" min="0">
             </div>
-
             <div class="form-group">
                 <label for="plazas">Plazas</label>
-                <input class="form-control" name="plazas" type="number" value="{{ curso.plazas }}" max="1000" min="0">
+                <input class="form-control" name="plazas" type="number" value="{{ curso.plazas }}" required
+                       max="1000" min="0">
             </div>
-
             <input class="btn btn-primary btn-lg btn-block" type="submit" value="Grabar Curso">
-
         </form>
     </div>
 {% endblock %}
-
-
