@@ -33,8 +33,8 @@
             <tr>
                 <td>{{ curso.sala.nombre }}</td>
                 <td>{{ curso.plazas }}</td>
-                <td>{{ curso.inscripciones|length }}</td>
-                <td>{{ curso.inscripciones|length }}</td>
+                <td>{{ inscripciones|length }}</td>
+                <td>{{ listaEspera|length }}</td>
                 <td>{{ curso.horas }}</td>
                 <td>{{ curso.sesiones|length }}</td>
             </tr>
@@ -68,17 +68,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% if curso.inscripciones is empty %}
+                    {% if inscripciones is empty %}
                         <tr><td colspan="6">No se han recibido inscripciones para este curso</td></tr>
                     {% else %}
-                        {% for inscripcion in curso.inscripciones %}
+                        {% for inscripcion in inscripciones %}
                             <tr>
                                 <td>{{ inscripcion.id }}</td>
                                 <td>{{ inscripcion.persona.nombre }}</td>
                                 <td>{{ inscripcion.persona.apellidos }}</td>
                                 <td>{{ inscripcion.persona.correo }}</td>
                                 <td>{{ inscripcion.fechaAlta|date('d/m/Y H:i') }}</td>
-                                {#<td>{{ inscripcion.estado.descripcion }}</td>#}
+                                <td>{{ inscripcion.estado.descripcion }}</td>
                             </tr>
                         {% endfor %}
                     {% endif %}
@@ -100,17 +100,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% if curso.inscripciones is empty %}
+                    {% if listaEspera is empty %}
                         <tr><td colspan="6">No se han recibido inscripciones para este curso</td></tr>
                     {% else %}
-                        {% for inscripcion in curso.inscripciones %}
+                        {% for inscripcion in listaEspera %}
                             <tr>
                                 <td>{{ inscripcion.id }}</td>
                                 <td>{{ inscripcion.persona.nombre }}</td>
                                 <td>{{ inscripcion.persona.apellidos }}</td>
                                 <td>{{ inscripcion.persona.correo }}</td>
                                 <td>{{ inscripcion.fechaAlta|date('d/m/Y H:i') }}</td>
-                                {#<td>{{ inscripcion.estado.descripcion }}</td>#}
+                                <td>{{ inscripcion.estado.descripcion }}</td>
                             </tr>
                         {% endfor %}
                     {% endif %}

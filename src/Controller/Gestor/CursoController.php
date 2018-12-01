@@ -4,6 +4,7 @@ namespace App\Controller\Gestor;
 
 use App\Entity\Curso\Curso;
 use App\Repository\CursoRepository;
+use App\Repository\InscripcionRepository;
 use App\Repository\SalaRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -43,11 +44,15 @@ class CursoController extends Controller
     /**
      * @Route("/mostrar/{id}", requirements={"id": "\d+"}, name="gestor_curso_mostrar")
      */
-    public function mostrar($id)
+    public function mostrar($id, InscripcionRepository $inscripcionRepository)
     {
         $curso = $this->repository->find($id);
+        $inscripciones = $inscripcionRepository->findInscripcionesReales();
+        $listaEspera = $inscripcionRepository->findInscripcionesEspera();
         return $this->render('gestor/curso/mostrar.html.twig', [
             'curso' => $curso,
+            'inscripciones' =>  $inscripciones,
+            'listaEspera' => $listaEspera,
         ]);
     }
 

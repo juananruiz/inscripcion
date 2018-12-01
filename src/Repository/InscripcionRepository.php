@@ -19,9 +19,29 @@ class InscripcionRepository extends ServiceEntityRepository
         parent::__construct($registry, Inscripcion::class);
     }
 
-//    /**
-//     * @return Inscripcion[] Returns an array of Inscripcion objects
-//     */
+    public function findInscripcionesReales()
+    {
+        return $this->createQueryBuilder('i')
+            ->innerJoin('i.estado', 'e')
+            ->andWhere('e.id = :inscrito_abonado OR e.id = :inscrito_impagado')
+            ->setParameter('inscrito_abonado', 1)
+            ->setParameter('inscrito_impagado', 2)
+            ->orderBy('i.fechaAlta', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findInscripcionesEspera()
+    {
+        return $this->createQueryBuilder('i')
+            ->innerJoin('i.estado', 'e')
+            ->andWhere('e.id = :inscrito_espera')
+            ->setParameter('inscrito_espera', 3)
+            ->orderBy('i.fechaAlta', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findByExampleField($value)
     {
@@ -32,18 +52,6 @@ class InscripcionRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Inscripcion
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
         ;
     }
     */

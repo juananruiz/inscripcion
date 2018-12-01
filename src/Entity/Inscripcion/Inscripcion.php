@@ -26,12 +26,6 @@ class Inscripcion
      */
     private $curso;
 
-    /*
-     * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion\Estado")
-     * @var Estado
-     */
-    private $estado;
-
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
@@ -51,6 +45,12 @@ class Inscripcion
      */
     private $persona;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion\Estado")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $estado;
+
 
     public function getId(): int
     {
@@ -65,18 +65,6 @@ class Inscripcion
     public function setCurso(Curso $curso): self
     {
         $this->curso = $curso;
-
-        return $this;
-    }
-
-    public function getEstado(): Estado
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(Estado $estado): self
-    {
-        $this->estado = $estado;
 
         return $this;
     }
@@ -113,6 +101,18 @@ class Inscripcion
     public function setPersona(Persona $persona): self
     {
         $this->persona = $persona;
+
+        return $this;
+    }
+
+    public function getEstado(): ?Estado
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?Estado $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }
