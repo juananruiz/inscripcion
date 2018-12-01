@@ -1,12 +1,12 @@
 {% extends 'gestor/layout_dashboard.html.twig' %}
-{% set titulo = 'Lista de Personas' %}
+{% set titulo = 'Lista de Usuarios' %}
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ titulo }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <a href="{{ path('gestor_persona_crear') }}" class="btn btn-sm btn-primary"><span
-                                data-feather="plus-circle"></span> Añadir Persona</a>
+                                data-feather="plus-circle"></span> Nuevo usuario</a>
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
             <button class="btn btn-sm btn-outline-secondary dropdown-toggle">

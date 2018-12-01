@@ -43,10 +43,16 @@ class PersonaController extends Controller
 
     /**
      * @Route("/crear", name="gestor_persona_crear")
+     * @param ProvinciaRepository $provinciaRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function crear()
+    public function crear(ProvinciaRepository $provinciaRepository)
     {
-        return $this->render('gestor/persona/crear.html.twig');
+        $provincias = $provinciaRepository->findAll();
+
+        return $this->render('gestor/persona/crear.html.twig', [
+            'provincias' => $provincias,
+        ]);
     }
 
     /**
