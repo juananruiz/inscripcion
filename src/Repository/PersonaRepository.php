@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Curso\Curso;
 use App\Entity\Persona\Persona;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -41,32 +42,36 @@ class PersonaRepository extends ServiceEntityRepository
         parent::getEntityManager()->flush();
     }
 
-//    /**
-//     * @return Persona[] Returns an array of Persona objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Curso $curso
+     * @return mixed
+     */
+    public function findCandidatos(Curso $curso)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        /*
+            SELECT persona.*
+            FROM persona
+            WHERE persona.id NOT IN(
+	            SELECT p.id  FROM persona p
+	            INNER JOIN inscripcion i ON i.persona_id = p.id
+	            WHERE i.curso_id = 1);
+        */
+        $subqb  = $this->_em->createQueryBuilder();
+        $subqb->select('p1.id')
+            ->from('App:Persona\Persona', 'p1')
+            ->innerJoin('p1.inscripciones', 'i')
+            ->where('i.curso = :curso');
+        // También se podría haber hecho el join al revés
+        //  ->from('App:Inscripcion\Inscripcion', 'i')
+        //  ->innerJoin('i.persona', 'p1')
+        //  ->where('i.curso = :curso');
 
-    /*
-    public function findOneBySomeField($value): ?Persona
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb  = $this->_em->createQueryBuilder();
+        $qb->select('p2')
+            ->from('App:Persona\Persona', 'p2')
+            ->where($qb->expr()->notIn('p2.id',  $subqb->getDQL()));
+        $qb->setParameter('curso', $curso);
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }
