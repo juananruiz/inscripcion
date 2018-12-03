@@ -20,6 +20,29 @@ class InscripcionRepository extends ServiceEntityRepository
         parent::__construct($registry, Inscripcion::class);
     }
 
+    /**
+     * @param Inscripcion $inscripcion
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Inscripcion $inscripcion)
+    {
+        parent::getEntityManager()->remove($inscripcion);
+        parent::getEntityManager()->flush();
+    }
+
+    /**
+     * @param Inscripcion $inscripcion
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Inscripcion $inscripcion)
+    {
+        parent::getEntityManager()->persist($inscripcion);
+        parent::getEntityManager()->flush();
+    }
+
+
     public function findInscripcionesReales(Curso $curso)
     {
         return $this->createQueryBuilder('i')

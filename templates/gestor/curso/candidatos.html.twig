@@ -31,9 +31,9 @@
                     <td>{{ persona.telefono }}</td>
                     <td>{{ persona.correo }}</td>
                     {#<td>{% if persona.domicilio %}{{ persona.domicilio.provincia.nombre }}{% endif %}</td>#}
-                    <td><a href="{{ path('gestor_persona_inscribir', {'persona_id': persona.id, 'curso_id': curso.id,
+                    <td><a href="{{ path('gestor_inscripcion_grabar', {'persona_id': persona.id, 'curso_id': curso.id,
                             'estado_id': 1}) }}"><span data-feather="check-square" title="Inscribir"></span></a>
-                    <a href="{{ path('gestor_persona_inscribir', {'persona_id': persona.id, 'curso_id': curso.id,
+                    <a href="{{ path('gestor_inscripcion_grabar', {'persona_id': persona.id, 'curso_id': curso.id,
                             'estado_id': 3}) }}"><span data-feather="clock" title="Inscribir en lista de espera"></span></a>
                     </td>
                 </tr>
