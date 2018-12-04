@@ -22,6 +22,20 @@
                 <label for="nombre">Nombre</label>
                 <input class="form-control" name="nombre" type="text" required >
             </div>
+            <div class="form-group">
+                <label for="codigo">Código</label>
+                <input class="form-control" name="codigo" type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea class="form-control" name="descripcion"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="modulo">Modulo</label>
+                <input class="form-control" name="modulo" type="text" required >
+            </div>
 
             <div class="form-group">
                 <label for="sala_id">Lugar</label>
@@ -30,6 +44,16 @@
                         <option value="{{ sala.id }}">{{ sala.nombre }}</option>
                     {% endfor %}
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fechas">Fechas</label>
+                <input class="form-control" name="fechas" type="text" required >
+            </div>
+
+            <div class="form-group">
+                <label for="turno">Turno</label>
+                <input class="form-control" name="turno" type="text" required >
             </div>
 
             <div class="form-group">

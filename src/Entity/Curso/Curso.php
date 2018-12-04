@@ -66,6 +66,26 @@ class Curso
      */
     private $plazas;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $modulo;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $codigo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fechas;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $turno;
+
 
     public function __construct()
     {
@@ -161,6 +181,54 @@ class Curso
     public function setPlazas(int $plazas): self
     {
         $this->plazas = $plazas;
+
+        return $this;
+    }
+
+    public function getModulo(): ?string
+    {
+        return $this->modulo;
+    }
+
+    public function setModulo(?string $modulo): self
+    {
+        $this->modulo = $modulo;
+
+        return $this;
+    }
+
+    public function getCodigo(): ?string
+    {
+        return $this->codigo;
+    }
+
+    public function setCodigo(string $codigo): self
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    public function getFechas(): ?string
+    {
+        return $this->fechas;
+    }
+
+    public function setFechas(?string $fechas): self
+    {
+        $this->fechas = $fechas;
+
+        return $this;
+    }
+
+    public function getTurno(): ?string
+    {
+        return $this->turno;
+    }
+
+    public function setTurno(string $turno): self
+    {
+        $this->turno = $turno;
 
         return $this;
     }
