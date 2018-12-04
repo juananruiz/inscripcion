@@ -5,14 +5,10 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ titulo }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary"><a
-                            href="{{ path('gestor_curso_editar', {'id': curso.id}) }}"><span
-                                data-feather="plus-circle"></span> Editar curso</a></button>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary">
-                <span data-feather="edit"></span>
-                <a href="{{ path('gestor_curso_candidatos', {'id': curso.id}) }}">Inscribir usuario</a>
+            <button class="btn btn-sm btn-outline-secondary"><a href="{{ path('gestor_curso_editar',
+                    {'id': curso.id}) }}"><span data-feather="plus-circle"></span> Editar curso</a></button>
+            <button class="btn btn-sm btn-outline-secondary"><a href="{{ path('gestor_curso_candidatos',
+                    {'id': curso.id}) }}"><span data-feather="edit"></span>Inscribir usuario</a>
             </button>
         </div>
     </div>
@@ -32,7 +28,9 @@
             </thead>
             <tbody>
             <tr>
-                <td><a href="{{ path('gestor_sala_mostrar', {'id': curso.sala.id}) }}">{{ curso.sala.nombre }}</a> ({{ curso.sala.aforo }})</td>
+                <td><a href="{{ path('gestor_sala_mostrar', {'id': curso.sala.id}) }}">{{ curso.sala.nombre }}</a>
+                    ({{ curso.sala.aforo }})
+                </td>
                 <td>{{ curso.plazas }}</td>
                 <td>{{ inscripcionesReales|length }}</td>
                 <td>{{ inscripcionesEspera|length }}</td>
@@ -46,16 +44,20 @@
 
     <ul class="nav nav-tabs" id="tabsCurso" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="inscripciones-tab" data-toggle="tab" href="#inscripciones" role="tab" aria-controls="inscripciones" aria-selected="false">Inscripciones</a>
+            <a class="nav-link active" id="inscripciones-tab" data-toggle="tab" href="#inscripciones" role="tab"
+               aria-controls="inscripciones" aria-selected="false">Inscripciones</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="lista-espera-tab" data-toggle="tab" href="#lista-espera" role="tab" aria-controls="lista-espera" aria-selected="true">Lista de espera</a>
+            <a class="nav-link" id="lista-espera-tab" data-toggle="tab" href="#lista-espera" role="tab"
+               aria-controls="lista-espera" aria-selected="true">Lista de espera</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="anulaciones-tab" data-toggle="tab" href="#anulaciones" role="tab" aria-controls="anulaciones" aria-selected="true">Anulaciones</a>
+            <a class="nav-link" id="anulaciones-tab" data-toggle="tab" href="#anulaciones" role="tab"
+               aria-controls="anulaciones" aria-selected="true">Anulaciones</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="sesiones-tab" data-toggle="tab" href="#sesiones" role="tab" aria-controls="sesiones" aria-selected="true">Sesiones</a>
+            <a class="nav-link" id="sesiones-tab" data-toggle="tab" href="#sesiones" role="tab" aria-controls="sesiones"
+               aria-selected="true">Sesiones</a>
         </li>
     </ul>
     <div class="tab-content" id="tabsCursoContenido">
@@ -77,7 +79,9 @@
                     </thead>
                     <tbody>
                     {% if inscripcionesReales is empty %}
-                        <tr><td colspan="6">No se han recibido inscripciones para este curso</td></tr>
+                        <tr>
+                            <td colspan="6">No se han recibido inscripciones para este curso</td>
+                        </tr>
                     {% else %}
                         {% for inscripcion in inscripcionesReales %}
                             <tr>
@@ -89,9 +93,11 @@
                                 <td>{% if inscripcion.fechaAlta %}{{ inscripcion.fechaAlta|date('d/m/Y') }}{% endif %}</td>
                                 <td>{% if inscripcion.fechaPago %}{{ inscripcion.fechaPago|date('d/m/Y') }}{% endif %}</td>
                                 <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
-                                        'estado_id': 2}) }}" title="Pasar a Lista de Espera"><span data-feather="clock"></span></a></td>
+                                        'estado_id': 2}) }}" title="Pasar a Lista de Espera"><span
+                                                data-feather="clock"></span></a></td>
                                 <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
-                                        'estado_id': 4}) }}" title="Anular Inscripción"><span data-feather="user-x"></span></a></td>
+                                        'estado_id': 4}) }}" title="Anular Inscripción"><span
+                                                data-feather="user-x"></span></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}
@@ -117,7 +123,9 @@
                     </thead>
                     <tbody>
                     {% if inscripcionesEspera is empty %}
-                        <tr><td colspan="6">No hay lista de espera para este curso</td></tr>
+                        <tr>
+                            <td colspan="6">No hay lista de espera para este curso</td>
+                        </tr>
                     {% else %}
                         {% for inscripcion in inscripcionesEspera %}
                             <tr>
@@ -129,9 +137,11 @@
                                 <td>{% if inscripcion.fechaAlta %}{{ inscripcion.fechaAlta|date('d/m/Y') }}{% endif %}</td>
                                 <td>{% if inscripcion.fechaPago %}{{ inscripcion.fechaPago|date('d/m/Y') }}{% endif %}</td>
                                 <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
-                                        'estado_id': 1}) }}" title="Confirmar Inscripción"><span data-feather="user-check"></span></a></td>
+                                        'estado_id': 1}) }}" title="Confirmar Inscripción"><span
+                                                data-feather="user-check"></span></a></td>
                                 <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
-                                        'estado_id': 4}) }}" title="Anular Inscripción"><span data-feather="user-x"></span></a></td>
+                                        'estado_id': 4}) }}" title="Anular Inscripción"><span
+                                                data-feather="user-x"></span></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}
@@ -156,7 +166,9 @@
                     </thead>
                     <tbody>
                     {% if inscripcionesAnuladas is empty %}
-                        <tr><td colspan="6">No hay inscripciones anuladas para este curso</td></tr>
+                        <tr>
+                            <td colspan="6">No hay inscripciones anuladas para este curso</td>
+                        </tr>
                     {% else %}
                         {% for inscripcion in inscripcionesAnuladas %}
                             <tr>
@@ -167,9 +179,11 @@
                                 <td>{{ inscripcion.persona.telefono }}</td>
                                 <td>{% if inscripcion.fechaAlta %}{{ inscripcion.fechaAlta|date('d/m/Y') }}{% endif %}</td>
                                 <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
-                                        'estado_id': 1}) }}" title="Volver a Inscribir"><span data-feather="user-check"></span></a></td>
+                                        'estado_id': 1}) }}" title="Volver a Inscribir"><span
+                                                data-feather="user-check"></span></a></td>
                                 <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
-                                        'estado_id': 2}) }}" title="Poner en lista de espera"><span data-feather="clock"></span></a></td>
+                                        'estado_id': 2}) }}" title="Poner en lista de espera"><span
+                                                data-feather="clock"></span></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Usuario;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * @Route("/curso")
+ * @Route("/" , name="usuario_inicio")
  */
-class CursoController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @Route("/listar", name="curso_listar")
@@ -16,8 +16,6 @@ class CursoController extends Controller
      */
     public function listar()
     {
-        return $this->render('curso/index.html.twig', [
-            'controller_name' => 'CursoController',
-        ]);
+        return $this->render('usuario/inicio.html.twig');
     }
 }

@@ -8,16 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * @Route("/gestor")
  */
-class HomeController extends Controller
+class DefaultController extends Controller
 {
     /**
-     * @Route("/inicio", name="gestor_inicio")
-     * @Route("/")
+     * @Route("/", name="gestor_inicio")
      */
     public function index()
     {
-        return $this->render('gestor/persona/index.html.twig', [
-            'controller_name' => 'PersonaController',
+        return $this->render('gestor/inicio.html.twig', [
+            'controller_name' => 'DefaultController',
         ]);
     }
 }
