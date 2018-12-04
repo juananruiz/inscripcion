@@ -32,9 +32,9 @@
                     <td>{{ persona.correo }}</td>
                     {#<td>{% if persona.domicilio %}{{ persona.domicilio.provincia.nombre }}{% endif %}</td>#}
                     <td><a href="{{ path('gestor_inscripcion_grabar', {'persona_id': persona.id, 'curso_id': curso.id,
-                            'estado_id': 1}) }}"><span data-feather="check-square" title="Inscribir"></span></a>
-                    <a href="{{ path('gestor_inscripcion_grabar', {'persona_id': persona.id, 'curso_id': curso.id,
-                            'estado_id': 3}) }}"><span data-feather="clock" title="Inscribir en lista de espera"></span></a>
+                            'estado_id': 1}) }}"><span data-feather="check-square" title="Inscribir"></span></a></td>
+                    <td><a href="{{ path('gestor_inscripcion_grabar', {'persona_id': persona.id, 'curso_id': curso.id,
+                            'estado_id': 2}) }}"><span data-feather="clock" title="Lista de espera"></span></a>
                     </td>
                 </tr>
             {% endfor %}

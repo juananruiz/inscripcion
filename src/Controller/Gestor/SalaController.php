@@ -41,6 +41,20 @@ class SalaController extends Controller
     }
 
     /**
+     * @Route("/mostrar/{id}", requirements={"id": "\d+"}, name="gestor_sala_mostrar")
+     * @param int $id
+     * @param ProvinciaRepository $provinciaRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function mostrar(int $id)
+    {
+        $sala = $this->repository->find($id);
+        return $this->render('gestor/sala/mostrar.html.twig', [
+            'sala' => $sala,
+        ]);
+    }
+
+    /**
      * @Route("/crear", name="gestor_sala_crear")
      * @param ProvinciaRepository $provinciaRepository
      * @return \Symfony\Component\HttpFoundation\Response

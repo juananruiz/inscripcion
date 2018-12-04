@@ -48,10 +48,9 @@ class InscripcionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('i')
             ->innerJoin('i.estado', 'e')
             ->andWhere('i.curso = :curso')
-            ->andWhere('e.id = :inscrito_abonado OR e.id = :inscrito_impagado')
+            ->andWhere('e.id = :inscrito')
             ->setParameter('curso', $curso)
-            ->setParameter('inscrito_abonado', 1)
-            ->setParameter('inscrito_impagado', 2)
+            ->setParameter('inscrito', 1)
             ->orderBy('i.fechaAlta', 'ASC')
             ->getQuery()
             ->getResult();
@@ -64,7 +63,7 @@ class InscripcionRepository extends ServiceEntityRepository
             ->andWhere('i.curso = :curso')
             ->andWhere('e.id = :inscrito_espera')
             ->setParameter('curso', $curso)
-            ->setParameter('inscrito_espera', 3)
+            ->setParameter('inscrito_espera', 2)
             ->orderBy('i.fechaAlta', 'ASC')
             ->getQuery()
             ->getResult();

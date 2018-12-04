@@ -28,13 +28,13 @@ class Inscripcion
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $fechaAlta;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $fechaBaja;
 
@@ -48,8 +48,15 @@ class Inscripcion
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion\Estado")
      * @ORM\JoinColumn(nullable=false)
+     * @var Estado
      */
     private $estado;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTimeInterface
+     */
+    private $fechaPago;
 
 
     public function getId(): int
@@ -69,24 +76,24 @@ class Inscripcion
         return $this;
     }
 
-    public function getFechaAlta(): \DateTime
+    public function getFechaAlta(): ?\DateTimeInterface
     {
         return $this->fechaAlta;
     }
 
-    public function setFechaAlta(\DateTime $fechaAlta): self
+    public function setFechaAlta(?\DateTimeInterface $fechaAlta): self
     {
         $this->fechaAlta = $fechaAlta;
 
         return $this;
     }
 
-    public function getFechaBaja(): \DateTime
+    public function getFechaBaja(): ?\DateTimeInterface
     {
         return $this->fechaBaja;
     }
 
-    public function setFechaBaja(\DateTime $fechaBaja): self
+    public function setFechaBaja(?\DateTimeInterface $fechaBaja): self
     {
         $this->fechaBaja = $fechaBaja;
 
@@ -113,6 +120,18 @@ class Inscripcion
     public function setEstado(?Estado $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getFechaPago(): ?\DateTimeInterface
+    {
+        return $this->fechaPago;
+    }
+
+    public function setFechaPago(?\DateTimeInterface $fechaPago): self
+    {
+        $this->fechaPago = $fechaPago;
 
         return $this;
     }
