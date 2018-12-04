@@ -16,6 +16,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class InscripcionController extends Controller
 {
+    const INSCRIPCION_REAL = 1;
+    const INSCRIPCION_ESPERA = 2;
+    const INSCRIPCION_ANULADA = 4;
+
     /**
      * @var InscripcionRepository
      */
@@ -55,6 +59,26 @@ class InscripcionController extends Controller
 
         return $this->redirectToRoute('gestor_curso_mostrar', [
             'id' => $curso->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/cambiar/{id}/{estado_id}", requirements={"id": "\d+", "estado_id": "\d+"}, name="gestor_inscripcion_cambiar_estado")
+     * @param int $id
+     * @param InscripcionEstadoRepository $estadoRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function cambiarEstado(int $id, int $estado_id, InscripcionEstadoRepository $estadoRepository)
+    {
+        $inscripcion = $this->repository->find($id);
+        $estado = $estadoRepository->find($estado_id);
+        $inscripcion->setEstado($estado);
+        $this->repository->save($inscripcion);
+
+        return $this->redirectToRoute('gestor_curso_mostrar', [
+            'id' => $inscripcion->getCurso()->getId(),
         ]);
     }
 }

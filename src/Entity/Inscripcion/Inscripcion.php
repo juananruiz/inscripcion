@@ -36,7 +36,7 @@ class Inscripcion
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTimeInterface
      */
-    private $fechaBaja;
+    private $fechaBaja; //!!! De momento no se usa
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Persona\Persona", inversedBy="inscripciones")

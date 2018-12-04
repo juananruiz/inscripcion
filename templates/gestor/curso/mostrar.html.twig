@@ -71,6 +71,8 @@
                         <th>Teléfono</th>
                         <th>Fecha Alta</th>
                         <th>Fecha Pago</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -86,6 +88,10 @@
                                 <td>{{ inscripcion.persona.telefono }}</td>
                                 <td>{% if inscripcion.fechaAlta %}{{ inscripcion.fechaAlta|date('d/m/Y') }}{% endif %}</td>
                                 <td>{% if inscripcion.fechaPago %}{{ inscripcion.fechaPago|date('d/m/Y') }}{% endif %}</td>
+                                <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
+                                        'estado_id': 2}) }}" title="Pasar a Lista de Espera"><span data-feather="clock"></span></a></td>
+                                <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
+                                        'estado_id': 4}) }}" title="Anular Inscripción"><span data-feather="user-x"></span></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}
@@ -105,6 +111,8 @@
                         <th>Teléfono</th>
                         <th>Fecha Alta</th>
                         <th>Fecha Pago</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -120,6 +128,10 @@
                                 <td>{{ inscripcion.persona.telefono }}</td>
                                 <td>{% if inscripcion.fechaAlta %}{{ inscripcion.fechaAlta|date('d/m/Y') }}{% endif %}</td>
                                 <td>{% if inscripcion.fechaPago %}{{ inscripcion.fechaPago|date('d/m/Y') }}{% endif %}</td>
+                                <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
+                                        'estado_id': 1}) }}" title="Confirmar Inscripción"><span data-feather="user-check"></span></a></td>
+                                <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
+                                        'estado_id': 4}) }}" title="Anular Inscripción"><span data-feather="user-x"></span></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}
@@ -138,7 +150,8 @@
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha Alta</th>
-                        <th>Fecha Baja</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -153,7 +166,10 @@
                                 <td>{{ inscripcion.persona.correo }}</td>
                                 <td>{{ inscripcion.persona.telefono }}</td>
                                 <td>{% if inscripcion.fechaAlta %}{{ inscripcion.fechaAlta|date('d/m/Y') }}{% endif %}</td>
-                                <td>{% if inscripcion.fechaBaja %}{{ inscripcion.fechaBaja|date('d/m/Y') }}{% endif %}</td>
+                                <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
+                                        'estado_id': 1}) }}" title="Volver a Inscribir"><span data-feather="user-check"></span></a></td>
+                                <td><a href="{{ path('gestor_inscripcion_cambiar_estado', {'id': inscripcion.id,
+                                        'estado_id': 2}) }}" title="Poner en lista de espera"><span data-feather="clock"></span></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}
