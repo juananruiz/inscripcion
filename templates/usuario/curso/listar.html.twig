@@ -1,0 +1,36 @@
+{% extends "usuario/layout_base.html.twig" %}
+{% set titulo = 'Grupos Organizados' %}
+
+{% block contenido %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ titulo }}</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Plazas</th>
+                <th>Inscritos</th>
+                <th>Duración</th>
+                <th>Lugar</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for curso in cursos %}
+                <tr>
+                    <td><a class="badge badge-primary" href="{{ path('usuario_curso_mostrar', {'id': curso.id}) }}" >{{ curso.id }}</a></td>
+                    <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.plazas }}</td>
+                    <td>{{ curso.inscripciones|length }}</td>
+                    <td>{{ curso.horas }}h</td>
+                    <td>{{ curso.sala.provincia.nombre }}</td>
+                    <td><a href="{{ path('usuario_inscripcion_solicitar', {'id': curso.id, 'estado_id': 1}) }}"><span data-feather="user-check"></span></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
