@@ -3,13 +3,12 @@
 
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">{{ titulo }}</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <button class="btn btn-sm btn-outline-secondary"><a href="{{ path('gestor_curso_editar',
-                    {'id': curso.id}) }}"><span data-feather="plus-circle"></span> Editar curso</a></button>
-            <button class="btn btn-sm btn-outline-secondary"><a href="{{ path('gestor_curso_candidatos',
-                    {'id': curso.id}) }}"><span data-feather="edit"></span>Inscribir usuario</a>
-            </button>
+        <h1 class="h4"><span class="badge badge-secondary">{{ curso.id }}</span> {{ titulo }}</h1>
+        <div class="btn-group mr-2">
+            <a class="btn btn-sm btn-outline-primary" href="{{ path('gestor_curso_editar',
+                    {'id': curso.id}) }}"><span data-feather="edit"></span> Editar curso</a>
+            <a class="btn btn-sm btn-outline-primary" href="{{ path('gestor_curso_candidatos',
+                    {'id': curso.id}) }}"><span data-feather="user-plus"></span> Inscribir usuario</a>
         </div>
     </div>
 
@@ -18,25 +17,37 @@
             <thead>
             <tr>
                 <th><span data-feather="map-pin"></span> Aula (aforo)</th>
+                <th><span data-feather="map-pin"></span> Lugar</th>
                 <th><span data-feather="monitor"></span> Plazas</th>
                 <th><span data-feather="user-check"></span> Inscritos</th>
-                <th><span data-feather="users"></span> En espera</th>
-                <th><span data-feather="user-x"></span> Anuladas</th>
-                <th><span data-feather="clock"></span> Duración</th>
-                <th><span data-feather="calendar"></span> Sesiones</th>
+                <th><span data-feather="users"></span> Espera</th>
+                <th><span data-feather="user-x"></span> Nulas</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td><a href="{{ path('gestor_sala_mostrar', {'id': curso.sala.id}) }}">{{ curso.sala.nombre }}</a>
-                    ({{ curso.sala.aforo }})
+                    ({{ curso.sala.aforo }} <span data-feather="monitor"></span>)
                 </td>
+                <td>{{ curso.sala.localidad }}</td>
                 <td>{{ curso.plazas }}</td>
                 <td>{{ inscripcionesReales|length }}</td>
                 <td>{{ inscripcionesEspera|length }}</td>
                 <td>{{ inscripcionesAnuladas|length }}</td>
-                <td>{{ curso.horas }}</td>
+            <tr>
+                <th colspan="2"><span data-feather="calendar"></span> Fechas</th>
+                <th><span data-feather="calendar"></span> Sesiones</th>
+                <th><span data-feather="clock"></span> Turno</th>
+                <th><span data-feather="clock"></span> Duración</th>
+                <th><span data-feather="book"></span> Módulo</th>
+
+            </tr>
+            <tr>
+                <td colspan="2">{{ curso.fechas }}</td>
                 <td>{{ curso.sesiones|length }}</td>
+                <td>{{ curso.turno }}</td>
+                <td>{{ curso.horas }} horas</td>
+                <td>{{ curso.modulo }}</td>
             </tr>
             </tbody>
         </table>

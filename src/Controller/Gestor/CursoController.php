@@ -76,6 +76,26 @@ class CursoController extends Controller
     }
 
     /**
+     * @Route("/copiar/{id}", requirements={"id": "\d+"}, name="gestor_curso_copiar")
+     * @param int $id
+     * @param SalaRepository $salaRepository
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function copiar(int $id, SalaRepository $salaRepository)
+    {
+        $cursoOrigen = $this->repository->find($id);
+        $cursoDestino = clone $cursoOrigen;
+        $this->repository->save($cursoDestino);
+        $salas = $salaRepository->findAll();
+        return $this->render('gestor/curso/editar.html.twig', [
+            'curso' => $cursoDestino,
+            'salas' => $salas,
+        ]);
+    }
+
+    /**
      * @Route("/editar/{id}", requirements={"id": "\d+"}, name="gestor_curso_editar")
      * @param int $id
      * @param SalaRepository $salaRepository

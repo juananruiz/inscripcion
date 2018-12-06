@@ -1,5 +1,5 @@
 {% extends 'gestor/layout_dashboard.html.twig' %}
-{% set titulo = 'Editar curso' %}
+{% set titulo = 'Editar curso '~curso.id %}
 
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -9,19 +9,26 @@
                 <a href="{{ path('gestor_curso_listar') }}" class="btn btn-sm btn-danger"><span
                             data-feather="arrow-left-circle"></span> Cancelar</a>
             </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
         </div>
     </div>
-
     <div class="col-md-8 order-md-1">
         <form class="form" action="{{ path('gestor_curso_grabar') }}" method="post">
             <input type="hidden" name="id" value="{{ curso.id }}">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input class="form-control" name="nombre" type="text" value="{{ curso.nombre }}" required >
+            </div>
+            <div class="form-group">
+                <label for="codigo">Código</label>
+                <input class="form-control" name="codigo" type="text" value="{{ curso.codigo }}" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea class="form-control" name="descripcion">{{ curso.descripcion }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="modulo">Modulo</label>
+                <input class="form-control" name="modulo" type="text" value="{{ curso.modulo }}" required >
             </div>
             <div class="form-group">
                 <label for="sala_id">Lugar</label>
@@ -32,6 +39,14 @@
                                 {% if curso.sala.id == sala.id %}selected{% endif %}>{{ sala.nombre }}</option>
                     {% endfor %}
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="fechas">Fechas</label>
+                <input class="form-control" name="fechas" type="text" value="{{ curso.fechas }}" required >
+            </div>
+            <div class="form-group">
+                <label for="turno">Turno</label>
+                <input class="form-control" name="turno" type="text" value="{{ curso.turno }}" required >
             </div>
             <div class="form-group">
                 <label for="horas">Duración (horas)</label>

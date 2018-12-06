@@ -9,13 +9,8 @@
                 <a href="{{ path('gestor_curso_listar') }}" class="btn btn-sm btn-danger"><span
                             data-feather="arrow-left-circle"></span> Cancelar</a>
             </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
         </div>
     </div>
-
     <div class="col-md-8 order-md-1">
         <form class="form" action="{{ path('gestor_curso_grabar') }}" method="post">
             <div class="form-group">
@@ -26,17 +21,14 @@
                 <label for="codigo">Código</label>
                 <input class="form-control" name="codigo" type="text" required>
             </div>
-
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <textarea class="form-control" name="descripcion"></textarea>
             </div>
-
             <div class="form-group">
                 <label for="modulo">Modulo</label>
                 <input class="form-control" name="modulo" type="text" required >
             </div>
-
             <div class="form-group">
                 <label for="sala_id">Lugar</label>
                 <select class="form-control" name="sala_id">
@@ -45,27 +37,22 @@
                     {% endfor %}
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="fechas">Fechas</label>
                 <input class="form-control" name="fechas" type="text" required >
             </div>
-
             <div class="form-group">
                 <label for="turno">Turno</label>
                 <input class="form-control" name="turno" type="text" required >
             </div>
-
             <div class="form-group">
                 <label for="horas">Duración (horas)</label>
                 <input class="form-control" name="horas" type="number" required max="100" min="0">
             </div>
-
             <div class="form-group">
                 <label for="plazas">Plazas</label>
                 <input class="form-control" name="plazas" type="number" required max="1000" min="0">
             </div>
-
             <button class="btn btn-primary btn-lg btn-block" type="submit">Grabar Curso</button>
 
         </form>
