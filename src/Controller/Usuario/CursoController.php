@@ -36,6 +36,21 @@ class CursoController extends Controller
     }
 
     /**
+     * @Route("/listar/{codigo}", name="usuario_curso_listar_codigo")
+     */
+    public function listarCodigo(string $codigo)
+    {
+        $cursos = $this->repository->findBy(['codigo' => $codigo]);
+        if (count($cursos) === 0){
+            return $this->redirectToRoute('usuario_inicio');
+        }
+
+        return $this->render('usuario/curso/listar.html.twig', [
+            'cursos' => $cursos,
+        ]);
+    }
+
+    /**
      * @Route("/mostrar/{id}", requirements={"id": "\d+"}, name="usuario_curso_mostrar")
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response

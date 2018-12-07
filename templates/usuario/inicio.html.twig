@@ -5,7 +5,7 @@
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Administración del Estado</h4>
+                <h4 class="my-0 font-weight-normal">Administración del Estado 2018</h4>
             </div>
             <div class="card-body">
                 <h1 class="card-title pricing-card-title">10 plazas</h1>
@@ -15,7 +15,7 @@
                     <li>80 plazas</li>
                     <li>Enero-Abril 2019</li>
                 </ul>
-                <a href="#" class="btn btn-lg btn-block btn-primary">Inscríbete</a>
+                <a href="{{ path('usuario_curso_listar_codigo', {'codigo': 'AE2018'}) }}" class="btn btn-lg btn-block btn-primary">Inscríbete</a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -30,7 +30,7 @@
                     <li>1000 plazas</li>
                     <li>Enero - Septiembre 2018</li>
                 </ul>
-                <a href="#" class="btn btn-lg btn-block btn-primary">Lista de Espera</a>
+                <a href="{{ path('usuario_curso_listar_codigo', {'codigo': 'AUXEST2017-18'}) }}" class="btn btn-lg btn-block btn-primary">Lista de Espera</a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -45,7 +45,7 @@
                     <li>120 plazas</li>
                     <li>A partir de Enero 2019</li>
                 </ul>
-                <a href="" class="btn btn-lg btn-block btn-primary">Inscríbete</a>
+                <a href="{{ path('usuario_curso_listar_codigo', {'codigo': 'US2019'}) }}" class="btn btn-lg btn-block btn-primary">Inscríbete</a>
             </div>
         </div>
     </div>
