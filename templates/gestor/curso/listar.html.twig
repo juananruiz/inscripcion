@@ -16,10 +16,12 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Módulo</th>
+                <th>Fechas</th>
+                <th>Turno</th>
+                <th>Lugar</th>
                 <th>Plazas</th>
                 <th>Inscritos</th>
-                <th>Duración</th>
-                <th>Lugar</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -31,10 +33,12 @@
                     <td><a class="badge badge-primary"
                            href="{{ path('gestor_curso_mostrar', {'id': curso.id}) }}">{{ curso.id }}</a></td>
                     <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.modulo }}</td>
+                    <td>{{ curso.fechas|slice(0,20) }}<a href="#" title="{{ curso.fechas }}">...</a></td>
+                    <td>{{ curso.turno }}</td>
+                    <td>{{ curso.sala.provincia.nombre }}</td>
                     <td>{{ curso.plazas }}</td>
                     <td>{{ curso.inscripciones|length }}</td>
-                    <td>{{ curso.horas }}h</td>
-                    <td>{{ curso.sala.provincia.nombre }}</td>
                     <td><a href="{{ path('gestor_curso_editar', {'id': curso.id}) }}"><span data-feather="edit"></span></a>
                     </td>
                     <td><a href="{{ path('gestor_curso_copiar', {'id': curso.id}) }}"><span data-feather="copy"></span></a>
