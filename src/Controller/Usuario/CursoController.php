@@ -24,7 +24,7 @@ class CursoController extends Controller
 
     /**
      * @Route("/listar", name="usuario_curso_listar")
-     * @Route("/")
+     * @Route("/", name="usuario_curso_listar_1")
      */
     public function listar()
     {

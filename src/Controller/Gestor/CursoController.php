@@ -31,7 +31,7 @@ class CursoController extends Controller
 
     /**
      * @Route("/listar", name="gestor_curso_listar")
-     * @Route("/")
+     * @Route("/", name="gestor_curso_listar_1")
      */
     public function listar()
     {

@@ -5,14 +5,12 @@ namespace App\Controller\Usuario;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-/**
- * @Route("/" , name="usuario_inicio")
- */
+
 class DefaultController extends Controller
 {
     /**
-     * @Route("/listar", name="curso_listar")
-     * @Route("/")
+     * @Route("/inicio", name="usuario_inicio")
+     * @Route("/", name="usuario_inicio_1")
      */
     public function listar()
     {

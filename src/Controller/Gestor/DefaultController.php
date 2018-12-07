@@ -12,6 +12,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="gestor_inicio")
+     * @Route("/inicio", name="gestor_inicio_1")
      */
     public function index()
     {

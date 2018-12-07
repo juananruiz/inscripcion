@@ -29,7 +29,7 @@ class SalaController extends Controller
 
     /**
      * @Route("/listar", name="gestor_sala_listar")
-     * @Route("/")
+     * @Route("/", name="gestor_sala_listar_1")
      */
     public function listar()
     {
