@@ -10,7 +10,9 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/gestor/persona")
@@ -30,7 +32,7 @@ class PersonaController extends Controller
 
     /**
      * @Route("/listar", name="gestor_persona_listar")
-     * @Route("/")
+     * @Route("/", name="gestor_persona_listar_1")
      */
     public function listar()
     {
@@ -78,11 +80,12 @@ class PersonaController extends Controller
      * @Route("/grabar", name="gestor_persona_grabar")
      * @param Request $request
      * @param ProvinciaRepository $provinciaRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param ValidatorInterface $validator
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function grabar(Request $request, ProvinciaRepository $provinciaRepository)
+    public function grabar(Request $request, ProvinciaRepository $provinciaRepository, ValidatorInterface $validator)
     {
         if ($id = $request->get('id')) {
             $persona = $this->repository->find($id);
@@ -104,6 +107,15 @@ class PersonaController extends Controller
         $persona->getDomicilio()->setLocalidad($request->get('localidad'));
         $persona->getDomicilio()->setNumero($request->get('numero'));
         $persona->getDomicilio()->setVia($request->get('via'));
+
+
+        $errors = $validator->validate($persona);
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return new Response($errorsString);
+        }
+
         $this->repository->save($persona);
 
         return $this->redirectToRoute("gestor_persona_listar");

@@ -7,6 +7,7 @@ use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CursoRepository")
@@ -20,6 +21,12 @@ class Curso
      * @var int
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    private $nombre;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -52,11 +59,6 @@ class Curso
     private $sesiones;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nombre;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
@@ -83,6 +85,7 @@ class Curso
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\NotBlank
      */
     private $turno;
 

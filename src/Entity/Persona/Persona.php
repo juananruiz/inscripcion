@@ -6,9 +6,13 @@ use App\Entity\Inscripcion\Inscripcion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonaRepository")
+ * @UniqueEntity("correo", message="Ya existe un usuario con este correo en nuestra web")
  */
 class Persona implements UserInterface, \Serializable
 {
@@ -21,16 +25,19 @@ class Persona implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $nombre;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $apellidos;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email
      */
     private $correo;
 
