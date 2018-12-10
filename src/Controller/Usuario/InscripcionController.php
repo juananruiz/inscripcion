@@ -32,42 +32,23 @@ class InscripcionController extends Controller
     }
 
     /**
-     * @Route("/solicitar/{id}/{estado_id}", requirements={"id": "\d+", "estado_id": "\d+"},  name="usuario_inscripcion_solicitar")
-     * @param int $id
+     * @Route("/solicitar/{curso_id}/{estado_id}", requirements={"cursoid": "\d+", "estado_id": "\d+"},  name="usuario_inscripcion_solicitar")
+     * @param int $curso_id
      * @param int $estado_id
-     * @param InscripcionEstadoRepository $estadoRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function solicitar(int $id, int $estado_id, InscripcionEstadoRepository $estadoRepository)
-    {
-        $inscripcion = $this->repository->find($id);
-        $estado = $estadoRepository->find($estado_id);
-        $inscripcion->setEstado($estado);
-        $this->repository->save($inscripcion);
-
-        return $this->redirectToRoute('usuario_curso_listar');
-    }
-
-    /**
-     * @Route("/grabar", name="usuario_inscripcion_grabar")
-     * @param Request $request
      * @param CursoRepository $cursoRepository
-     * @param PersonaRepository $personaRepository
      * @param InscripcionEstadoRepository $estadoRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param PersonaRepository $personaRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function grabar(Request $request, CursoRepository $cursoRepository, PersonaRepository $personaRepository,
-                           InscripcionEstadoRepository $estadoRepository)
+    public function solicitar(int $curso_id, int $estado_id, CursoRepository $cursoRepository,
+                              InscripcionEstadoRepository $estadoRepository, PersonaRepository $personaRepository)
     {
-        $curso = $cursoRepository->find($request->get('curso_id'));
-        $persona = $personaRepository->find($request->get('persona_id'));
-        $estado = $estadoRepository->find($request->get('estado_id'));
-
         $inscripcion = new Inscripcion();
+        $curso = $cursoRepository->find($curso_id);
+        $persona = $personaRepository->find(7);
+        $estado = $estadoRepository->find($estado_id);
         $inscripcion
             ->setCurso($curso)
             ->setPersona($persona)
@@ -76,26 +57,29 @@ class InscripcionController extends Controller
         ;
         $this->repository->save($inscripcion);
 
-        return $this->redirectToRoute('usuario_curso_listar');
+        return $this->render('usuario/inscripcion/resultado.html.twig', [
+            'curso' => $inscripcion->getCurso()
+        ]);
     }
+
 
     /**
      * @Route("/anular/{id}", requirements={"id": "\d+"}, name="usuario_inscripcion_anular")
      * @param int $id
      * @param InscripcionEstadoRepository $estadoRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function cambiarEstado(int $id, int $estado_id, InscripcionEstadoRepository $estadoRepository)
+    public function anular(int $id, InscripcionEstadoRepository $estadoRepository)
     {
         $inscripcion = $this->repository->find($id);
-        $estado = $estadoRepository->find($estado_id);
+        $estado = $estadoRepository->find(self::INSCRIPCION_ANULADA);
         $inscripcion->setEstado($estado);
         $this->repository->save($inscripcion);
 
-        return $this->redirectToRoute('gestor_curso_mostrar', [
-            'id' => $inscripcion->getCurso()->getId(),
+        return $this->render('usuario/inscripcion/resultado.html.twig', [
+            'curso' => $inscripcion->getCurso()
         ]);
     }
 }

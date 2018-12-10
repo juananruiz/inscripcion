@@ -1,0 +1,23 @@
+{% extends "usuario/layout_base.html.twig" %}
+{% set titulo = 'Resultado de la Inscripción' %}
+
+{% block contenido %}
+<div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Inscripción realizada</h4>
+        </div>
+        <div class="card-body">
+            <h2>{{ curso.nombre }}</h2>
+            <p>Módulo {{ curso.modulo }}</p>
+            <p>Lugar: {{ curso.sala.nombre }} - {{ curso.sala.localidad }}</p>
+            <p>Fechas: {{ curso.fechas }}</p>
+            <p>Turno: {{ curso.turno }}</p>
+            <p>Aquí habrá más información sobre la inscripción</p>
+
+            <p><b>Gracias por inscribirte en breve recibirás un correo con toda la información</b></p>
+            <a href="{{ curso.url }}" class="btn btn-lg btn-block btn-primary">Ver toda la información sobre el curso</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
