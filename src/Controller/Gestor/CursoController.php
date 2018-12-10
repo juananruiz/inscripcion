@@ -127,15 +127,18 @@ class CursoController extends Controller
             $curso = new Curso();
         }
         $sala = $salaRepository->find($request->get('sala_id'));
-        $curso->setCodigo($request->get('codigo'));
-        $curso->setDescripcion($request->get('descripcion'));
-        $curso->setFechas($request->get('fechas'));
-        $curso->setHoras($request->get('horas'));
-        $curso->setModulo($request->get('modulo'));
-        $curso->setNombre($request->get('nombre'));
-        $curso->setPlazas($request->get('plazas'));
-        $curso->setSala($sala);
-        $curso->setTurno($request->get('turno'));
+        $curso
+            ->setCodigo($request->get('codigo'))
+            ->setDescripcion($request->get('descripcion'))
+            ->setFechas($request->get('fechas'))
+            ->setHoras($request->get('horas'))
+            ->setModulo($request->get('modulo'))
+            ->setNombre($request->get('nombre'))
+            ->setPlazas($request->get('plazas'))
+            ->setSala($sala)
+            ->setTurno($request->get('turno'))
+            ->setUrl($request->get('url'))
+            ;
         $this->repository->save($curso);
 
         return $this->redirectToRoute("gestor_curso_listar");

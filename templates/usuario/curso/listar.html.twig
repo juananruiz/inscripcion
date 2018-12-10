@@ -1,5 +1,5 @@
 {% extends "usuario/layout_base.html.twig" %}
-{% set titulo = "Grupos" ~ cursos[0].nombre %}
+{% set titulo = "Grupos " ~ cursos[0].nombre %}
 
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -28,7 +28,10 @@
                     <td>{% if (curso.plazas - curso.inscripciones|length) < 1 %}Completo{% else %}{{ curso.plazas - curso.inscripciones|length }}{% endif %}</td>
                     <td><a href="{{ curso.sala.mapaUrl }}" title="{{ curso.sala.direccion }} {{ curso.sala.localidad }}" >{{ curso.sala.nombre }}</a></td>
                     <td>{{ curso.sala.provincia.nombre }}</td>
-                    <td><a href="{{ path('usuario_inscripcion_solicitar', {'id': curso.id, 'estado_id': 1}) }}"><span data-feather="user-check"> Inscríbeme</span></a></td>
+                    <td>{% if (curso.plazas - curso.inscripciones|length) < 1 %}<a href="{{ path('usuario_inscripcion_solicitar',
+                            {'curso_id': curso.id, 'estado_id': 2}) }}"><span data-feather="clock"> Lista de espera</span></a>{% else %} <a
+                            href="{{ path('usuario_inscripcion_solicitar', {'curso_id': curso.id, 'estado_id': 1}) }}"><span
+                            data-feather="user-check"> Inscríbeme</span></a>{% endif %}</td>
                 </tr>
             {% endfor %}
             </tbody>
