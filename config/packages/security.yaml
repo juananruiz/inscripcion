@@ -1,12 +1,12 @@
 security:
     encoders:
-        App\Entity\Usuario:
+        App\Entity\Persona\Persona:
             algorithm: bcrypt
     providers:
         in_memory: { memory: ~ }
         base_de_datos:
             entity:
-                class: App\Entity\Persona
+                class: App\Entity\Persona\Persona
                 property: correo
     firewalls:
         dev:
